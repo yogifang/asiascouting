@@ -4,8 +4,9 @@ const AppContext = createContext();
 
 export function AppWrapper({ children }) {
   const [member, setMember] = useState("");
+  const [sportItem, setSportItem] = useState("baseball");
 
-  let sharedState = { member, setMember };
+  let sharedState = { member, setMember, sportItem, setSportItem };
   return (
     <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
   );
