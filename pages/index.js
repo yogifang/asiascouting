@@ -1,6 +1,7 @@
 import styles from "../styles/Contant.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
+import Login from "../components/login";
 import {
   Button,
   Grid,
@@ -9,6 +10,7 @@ import {
   Row,
   Col,
   Container,
+  Spinner,
   ButtonGroup,
 } from "react-bootstrap";
 import { useState, useEffect, useReducer, createContext } from "react";
@@ -19,21 +21,69 @@ import saveImage from "../pages/assets/buttons/next.png";
 //import PagesManifestPlugin from "next/dist/build/webpack/plugins/pages-manifest-plugin";
 
 export default function Home() {
-  const handleCreate = () => {};
+  const [login, setLogin] = useState(false);
+  const [typeLogin, setTypeLogin] = useState("");
 
-  const handleLogin = () => {};
+  const handleCreate = () => {
+    setLogin(true);
+    setTypeLogin("create");
+  };
 
+  const handleLogin = () => {
+    setLogin(true);
+    setTypeLogin("login");
+  };
+
+  const handleGoogleLogin = () => {
+    setLogin(true);
+    setTypeLogin("google");
+  };
+
+  const switchRender = () => {
+    console.log(typeLogin);
+    switch (typeLogin) {
+      case "login":
+        console.log("switch....login....");
+        return <Login />;
+        break;
+      case "create":
+        break;
+      case "google":
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <Container className={styles.container}>
       <Navbar />
-      <Row>
-        <Col>
-          <Button variant="primary" className={styles.btnAppLogin}></Button>{" "}
-        </Col>
-        <Col>
-          <Button variant="primary" className={styles.btnAppCreate}></Button>{" "}
-        </Col>
-      </Row>
+      {!login ? (
+        <Row>
+          <Col>
+            <Button
+              justification="right"
+              variant="secondary"
+              className={styles.btnAppCreate}
+              onClick={handleCreate}
+            ></Button>{" "}
+          </Col>
+          <Col>
+            <Button
+              justification="left"
+              variant="secondary"
+              className={styles.btnAppLogin}
+              onClick={handleLogin}
+            ></Button>{" "}
+          </Col>
+          <Col>
+            <Button variant="secondary" onClick={handleGoogleLogin}>
+              Google Login
+            </Button>{" "}
+          </Col>
+        </Row>
+      ) : (
+        <>{switchRender()}</>
+      )}
     </Container>
   );
 }
