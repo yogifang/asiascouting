@@ -1,13 +1,14 @@
 .container {
-  width: 100%;
-  min-height: 100vh;
+  width: 1000px;
+  height: 100vh;
   padding-top: 120px;
   padding-left: 130px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   margin-right: auto;
+  min-height: 100vh;
 }
 
 .contant {
@@ -18,7 +19,6 @@
   display: flex;
   width: 1000px !important;
   height: 1000px;
-  min-height: 64px !important;
   background-color: #fff;
 }
 .row {
@@ -32,28 +32,30 @@
   min-height: 64px !important;
   background-color: #fff;
 }
-
-.btn-save,
-.btnlogin {
+.btnAppLogin {
   display: block !important;
   margin: 0 auto !important;
   width: 196px;
   height: 100px;
   border: none;
-  background-image: url("../pages/assets/buttons/next.png");
+  background-image: url("../pages/assets/buttons/login.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-color: unset !important;
   box-shadow: unset !important;
-  align-items: center;
 }
 
-.btnlogin {
-  background-image: url("../pages/assets/buttons/next.png");
-  display: inline-block !important;
-  margin: unset !important;
+.btnAppCreate {
+  display: block !important;
+  margin: 0 auto !important;
   width: 196px;
   height: 100px;
+  border: none;
+  background-image: url("../pages/assets/buttons/register.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: unset !important;
+  box-shadow: unset !important;
 }
 
 .main {

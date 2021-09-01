@@ -1,7 +1,16 @@
 import styles from "../styles/Contant.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
-import { Button, Grid, Form, Nav, Row, Col, Container } from "react-bootstrap";
+import {
+  Button,
+  Grid,
+  Form,
+  Nav,
+  Row,
+  Col,
+  Container,
+  ButtonGroup,
+} from "react-bootstrap";
 import { useState, useEffect, useReducer, createContext } from "react";
 import Navbar from "../components/Navbar";
 import registerImage from "../pages/assets/buttons/register.png";
@@ -17,8 +26,14 @@ export default function Home() {
   return (
     <Container className={styles.container}>
       <Navbar />
-
-      <h1>Hello Test</h1>
+      <Row>
+        <Col>
+          <Button variant="primary" className={styles.btnAppLogin}></Button>{" "}
+        </Col>
+        <Col>
+          <Button variant="primary" className={styles.btnAppCreate}></Button>{" "}
+        </Col>
+      </Row>
     </Container>
   );
 }
