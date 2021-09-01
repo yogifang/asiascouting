@@ -1,20 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
-import { Button, Card, Form } from 'react-bootstrap';
+import styles from "../styles/Contant.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Link from "next/link";
+import { Button, Grid, Form, Nav, Row, Col, Container } from "react-bootstrap";
 import { useState, useEffect, useReducer, createContext } from "react";
-import {Container } from 'react-bootstrap'
-
-
+import Navbar from "../components/Navbar";
+import registerImage from "../pages/assets/buttons/register.png";
+import loginImage from "../pages/assets/buttons/login.png";
+import saveImage from "../pages/assets/buttons/next.png";
+//import PagesManifestPlugin from "next/dist/build/webpack/plugins/pages-manifest-plugin";
 
 export default function Home() {
+  const handleCreate = () => {};
+
+  const handleLogin = () => {};
+
   return (
-    <Container  className={styles.container }>
-    
-      <h1>Hello World</h1>
+    <Container className={styles.container}>
+      <Navbar />
+
+      <h1>Hello Test</h1>
     </Container>
-  )
+  );
 }
