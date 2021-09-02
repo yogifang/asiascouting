@@ -1,9 +1,28 @@
 import { Form, FormControl, Button, Row, Col } from "react-bootstrap";
 import styles from "../styles/Contant.module.css";
+import fetch from "isomorphic-unfetch";
 
 const Login = () => {
+  const getMembers = async () => {
+    try {
+      const url = process.env.HOST_URI + `api/members/`;
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const record = await res.json();
+      console.log(record.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleInputChange = () => {};
-  const handleClickSubmit = () => {};
+  const handleClickSubmit = () => {
+    getMembers();
+  };
   return (
     <div className={styles.contant}>
       <Row>
@@ -35,9 +54,9 @@ const Login = () => {
         <Col lg="6">
           <FormControl
             id="user_password"
-            type="text"
+            type="password"
             className={styles.colRightMain}
-            name="email"
+            name="password"
             onChange={handleInputChange}
           />
           <Form.Label className={styles.colRightSub}>5678</Form.Label>{" "}
@@ -46,19 +65,11 @@ const Login = () => {
       <Row>
         <p className={styles.m0}>
           * 本人已閱讀並同意願遵守
-          <a
-            href="https://www.findyourathlete.com/termsofuse"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="/ASNTermsofUse.html" target="_blank" rel="noreferrer">
             使用者條款
           </a>
           及
-          <a
-            href="https://www.findyourathlete.com/privacypolicy"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="/ASNPrivacyPolicy.html" target="_blank" rel="noreferrer">
             隱私權政策
           </a>
           <br />
@@ -80,6 +91,7 @@ const Login = () => {
           justification="right"
           variant="secondary"
           className={styles.btnAppLoginSmall}
+          onClick={handleClickSubmit}
         ></Button>{" "}
       </Row>
     </div>

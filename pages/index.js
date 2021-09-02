@@ -2,10 +2,7 @@ import styles from "../styles/Contant.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Link from "next/link";
 import Login from "../components/login";
-<<<<<<< HEAD
 import Create from "../components/create";
-=======
->>>>>>> 76e59063779354612be1802f489dbbcd56c2723d
 import {
   Button,
   Grid,
