@@ -1,31 +1,39 @@
 import dbConnect from '../../../utils/dbConnect';
-import Connects from '../../../models/dbContacts';
+import Connects from '../../../models/dbMembers';
 dbConnect();
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
   const {
-    query: { member },
+    query: { email },
     method,
   } = req;
 
+  console.log('----------088-------------');
+  console.log(email);
+  var params = email.split('&');
+  let userEmail = params[0];
+  console.log(userEmail);
   switch (method) {
     case 'GET':
       try {
+        const member = await Connects.findOne({ email: userEmail }).exec();
         console.log(member);
-        const baseballinfo = await Connects.findOne({ member }).exec();
-        console.log(baseballinfo);
-        if (!baseballinfo) {
+        if (!member) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: baseballinfo });
+        if (params[1] === member.password) {
+          res.status(200).json({ success: true, data: member });
+        } else {
+          res.status(404).json({ success: false });
+        }
       } catch (error) {
         res.status(400).json({ success: false });
       }
       break;
     case 'PUT':
       try {
-        const baseballinfo = await Connects.findByIdAndUpdate(member, req.body, {
+        const members = await Connects.findByIdAndUpdate(email, req.body, {
           new: true,
           runValmemberators: true,
         });
@@ -41,7 +49,7 @@ export default async (req, res) => {
       break;
     case 'DELETE':
       try {
-        const deletedConnects = await Connects.deleteOne({ member: member });
+        const deletedConnects = await Connects.deleteOne({ email: email });
         if (!deletedConnects) {
           return res.status(400).json({ success: false });
         }

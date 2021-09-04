@@ -8,6 +8,7 @@ export default async (req, res) => {
 
   switch (method) {
     case 'GET':
+      console.log('get----------index');
       try {
         const baseballinfo = await BaseballInfo.find({});
         res.status(200).json({ success: true, data: baseballinfo });
@@ -17,6 +18,7 @@ export default async (req, res) => {
       break;
     case 'POST':
       try {
+        console.log('post----------index');
         const baseballinfo = await BaseballInfo.create(req.body);
 
         res.status(201).json({ success: true, data: baseballinfo });

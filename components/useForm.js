@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-export function useForm(initialFValues, validateOnChange = false) {
+export function useForm(initialFValues, validateOnChange = false, validate) {
   const [values, setValues] = useState(initialFValues);
   const [errors, setErrors] = useState({});
 
@@ -10,10 +10,11 @@ export function useForm(initialFValues, validateOnChange = false) {
       ...values,
       [name]: value,
     });
-    if (validateOnChange)
+    if (validateOnChange) {
       validate({
         [name]: value,
       });
+    }
   };
 
   const resetForm = () => {
@@ -45,9 +46,9 @@ export function Form(props) {
   //const classes = useStyles();
   const { children, ...other } = props;
   return (
-    <form autoComplete="off" {...other}>
-      {" "}
-      {props.children}{" "}
+    <form autoComplete='off' {...other}>
+      {' '}
+      {props.children}{' '}
     </form>
   );
 }

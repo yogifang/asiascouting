@@ -1,56 +1,43 @@
-import styles from "../styles/Contant.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Link from "next/link";
-import Login from "../components/login";
-import Create from "../components/create";
-import {
-  Button,
-  Grid,
-  Form,
-  Nav,
-  Row,
-  Col,
-  Container,
-  Spinner,
-  ButtonGroup,
-} from "react-bootstrap";
-import { useState, useEffect, useReducer, createContext } from "react";
-import Navbar from "../components/Navbar";
-import registerImage from "../pages/assets/buttons/register.png";
-import loginImage from "../pages/assets/buttons/login.png";
-import saveImage from "../pages/assets/buttons/next.png";
-//import PagesManifestPlugin from "next/dist/build/webpack/plugins/pages-manifest-plugin";
+import styles from '../styles/Contant.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Link from 'next/link';
+import Login from '../components/login';
+import Create from '../components/create';
+import { Button, Grid, Form, Nav, Row, Col, Container, Spinner, ButtonGroup } from 'react-bootstrap';
+import { useState, useEffect, useReducer, useContext } from 'react';
+import { Context } from '../components/stores';
+import Navbar from '../components/Navbar';
 
 export default function Home() {
   const [login, setLogin] = useState(false);
-  const [typeLogin, setTypeLogin] = useState("");
-
+  const [typeLogin, setTypeLogin] = useState('');
+  const { member, setMember } = useContext(Context);
   const handleCreate = () => {
     setLogin(true);
-    setTypeLogin("create");
+    setTypeLogin('create');
   };
 
   const handleLogin = () => {
     setLogin(true);
-    setTypeLogin("login");
+    setTypeLogin('login');
   };
 
   const handleGoogleLogin = () => {
     setLogin(true);
-    setTypeLogin("google");
+    setTypeLogin('google');
   };
 
   const switchRender = () => {
     console.log(typeLogin);
     switch (typeLogin) {
-      case "login":
-        console.log("switch....login....");
+      case 'login':
+        console.log('switch....login....');
         return <Login />;
         break;
-      case "create":
+      case 'create':
         return <Create />;
         break;
-      case "google":
+      case 'google':
         break;
       default:
         break;
@@ -63,24 +50,24 @@ export default function Home() {
         <Row>
           <Col>
             <Button
-              justification="right"
-              variant="secondary"
+              justification='right'
+              variant='secondary'
               className={styles.btnAppCreate}
               onClick={handleCreate}
-            ></Button>{" "}
+            ></Button>{' '}
           </Col>
           <Col>
             <Button
-              justification="left"
-              variant="secondary"
+              justification='left'
+              variant='secondary'
               className={styles.btnAppLogin}
               onClick={handleLogin}
-            ></Button>{" "}
+            ></Button>{' '}
           </Col>
           <Col>
-            <Button variant="secondary" onClick={handleGoogleLogin}>
+            <Button variant='secondary' onClick={handleGoogleLogin}>
               Google Login
-            </Button>{" "}
+            </Button>{' '}
           </Col>
         </Row>
       ) : (

@@ -1,56 +1,76 @@
-import Link from "next/link";
-import { Navbar, Button, Tabs, Tab, Container, Nav } from "react-bootstrap";
-import styles from "../styles/Nav.module.css";
+import { Navbar, Button, ButtonGroup, Container, Nav } from 'react-bootstrap';
+import styles from '../styles/Nav.module.css';
+import { Context } from './stores';
+import { useState, useEffect, useReducer, useContext } from 'react';
+import NavSwap from './NavSwap';
+import { useRouter } from 'next/router';
 
-const AppNavbar = () => (
-  <>
-    <Navbar bg="light" variant="light" className={styles.navbar}>
-      <Nav className={styles.navbar}>
-        <Nav.Link href="#home">
-          {" "}
+const AppNavbar = () => {
+  const { member, setMember, sportItem, setSportItem } = useContext(Context);
+  const router = useRouter();
+  //console.log(member);
+  //console.log('Nav-----------');
+  //console.log(sportItem);
+
+  const handleButtonClick = (event, path) => {
+    // console.log(event);
+    // console.log(path);
+    event.preventDefault();
+    router.push(path);
+  };
+
+  return (
+    <>
+      <ButtonGroup className={styles.navbar}>
+        <Button size='sm' id='login' variant='light' onClick={(e) => handleButtonClick(e, '/')}>
           <span>
-            帳號建立<br></br>Sign Up for Free{" "}
+            帳號建立<br></br>Sign Up for Free
           </span>
-        </Nav.Link>
-        <Nav.Link href="#features">
-          {" "}
+        </Button>
+        <Button
+          size='sm'
+          variant='light'
+          onClick={(e) => handleButtonClick(e, '/basicinfo')}
+          className={member === '' ? 'disabled' : 'disabled:false'}
+        >
           <span>
-            基本資料 <br></br>Basic Info{" "}
+            基本資料 <br></br>Basic Info
           </span>
-        </Nav.Link>
-        <Nav.Link href="#pricing">
-          {" "}
+        </Button>
+        <NavSwap />
+        <Button
+          size='sm'
+          variant='light'
+          onClick={(e) => handleButtonClick(e, '/basicinfo')}
+          className={member === '' ? 'disabled' : 'disabled:false'}
+        >
           <span>
-            成績及運動表現 <br></br>Physical Performance{" "}
+            聯繫資料 <br></br>Contact
           </span>
-        </Nav.Link>
-        <Nav.Link href="#pricing">
+        </Button>
+        <Button
+          size='sm'
+          variant='light'
+          onClick={(e) => handleButtonClick(e, '/basicinfo')}
+          className={member === '' ? 'disabled' : 'disabled:false'}
+        >
           <span>
-            射擊成績 <br></br>Shooting{" "}
+            學科相關成績 <br></br>Academic Achievements
           </span>
-        </Nav.Link>
-        <Nav.Link href="#pricing">
-          {" "}
+        </Button>
+        <Button
+          size='sm'
+          variant='light'
+          onClick={(e) => handleButtonClick(e, '/basicinfo')}
+          className={member === '' ? 'disabled' : 'disabled:false'}
+        >
           <span>
-            {" "}
-            聯繫資料 <br></br>Contact{" "}
+            確認送出 <br></br>Submit
           </span>
-        </Nav.Link>
-        <Nav.Link href="#pricing">
-          {" "}
-          <span>
-            學科相關成績 <br></br>Academic Achievements{" "}
-          </span>
-        </Nav.Link>
-        <Nav.Link href="#pricing">
-          {" "}
-          <span>
-            確認送出 <br></br>Submit{" "}
-          </span>
-        </Nav.Link>
-      </Nav>
-    </Navbar>
-  </>
-);
+        </Button>
+      </ButtonGroup>
+    </>
+  );
+};
 
 export default AppNavbar;
