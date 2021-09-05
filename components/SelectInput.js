@@ -1,13 +1,15 @@
-import { Form, FormControl, Col } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import styles from '../styles/Contant.module.css';
-
-const TextInput = (props) => {
+import Select from 'react-select';
+const SelectInput = (props) => {
   //  console.log(props.values);
   // console.log(props.values[props.configText.name]);
   // console.log(props.handleFunc);
 
-  const handleLocalChange = (e) => {
-    props.handleFunc(e);
+  const handleLocalChange = (level) => {
+    // console.log('----------Select');
+    // console.log(level);
+    props.handleFunc(level, props.configText.name);
   };
 
   return (
@@ -19,13 +21,14 @@ const TextInput = (props) => {
         </Form.Label>{' '}
       </Col>
       <Col lg='7'>
-        <FormControl
-          id={props.configText.name}
-          type={props.configText.type}
-          className={styles.colRightMain}
+        <Select
+          placeholder='Select Level'
+          className={styles.rightSelect}
           name={props.configText.name}
+          autosize={true}
           onChange={handleLocalChange}
-          value={props.values[props.configText.name]}
+          id={props.configText.name}
+          options={props.configText.options}
         />
         <Form.Label className={styles.colRightSub}>{props.error[props.configText.name]}</Form.Label>{' '}
       </Col>
@@ -33,4 +36,4 @@ const TextInput = (props) => {
   );
 };
 
-export default TextInput;
+export default SelectInput;

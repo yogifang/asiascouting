@@ -10,12 +10,16 @@ import { useState, useEffect, useReducer, useContext } from 'react';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import TextInput from '../components/TextInput';
+import DateInput from '../components/DateInput';
+import SelectInput from '../components/SelectInput';
+
 const initialFValues = {
   _id: '',
   ChineseName: '',
   PassportName: '',
   Gender: '',
-  GradDate: Date.now(),
+  GradDate: Date.now(0),
   Height: 0.0,
   LeftRightHand: '',
   PriPosition: '',
@@ -61,6 +65,47 @@ const optionsGrads = [
   { value: 'G13', label: '大學' },
 ];
 
+const ChineseName = {
+  type: 'text',
+  main: '*中文姓名',
+  sub: '*Preferred Name',
+  name: 'ChineseName',
+};
+
+const PassportName = {
+  type: 'text',
+  main: '*護照英文名',
+  sub: '*First Name and Last Name',
+  name: 'PassportName',
+};
+
+const Height = {
+  type: 'number',
+  main: '身高(公分)',
+  sub: 'Height (cm)',
+  name: 'Height',
+};
+
+const Weight = {
+  type: 'number',
+  main: '體重(公斤)',
+  sub: 'Weight(kg)',
+  name: 'Weight',
+};
+
+const CurrentGrad = {
+  options: optionsGrads,
+  main: '年級',
+  sub: 'School Grad Year',
+  name: 'currentGrad',
+};
+const GradDate = {
+  format: 'MM/yyyy',
+  main: '高中預計畢業日期(年月)',
+  sub: 'High School Expected Graduation Date',
+  name: 'GradDate',
+};
+
 const BasicInfo = () => {
   const { member, setMember } = useContext(Context);
   const [radioGenger, setRadioGender] = useState('Male');
@@ -68,7 +113,7 @@ const BasicInfo = () => {
   const [selSecPosition, setSelSecPosition] = useState(optionsPosition[1]);
   const [selHands, setSelHands] = useState(optionsHands[0]);
   const [selGrads, setSelGrads] = useState(optionsGrads[0]);
-  const [dateGrad, setDateGrad] = useState(new Date());
+  const [dateGrad, setDateGrad] = useState(Date.now());
   const [loaded, setLoaded] = useState(false);
   const findIndexByValue = (options, value) => {
     const index = options.findIndex((options) => options.value === value);
@@ -92,8 +137,11 @@ const BasicInfo = () => {
         let nValues = {};
         for (field in values) {
           //  console.log(field);
-          console.log(Data.data[field]);
-          nValues[field] = Data.data[field];
+          if (field !== 'GradDate') {
+            console.log(Data.data[field]);
+            nValues[field] = Data.data[field];
+          }
+
           // setValues(field, Data.data[field]);
         }
         console.log(nValues);
@@ -107,7 +155,7 @@ const BasicInfo = () => {
         index = findIndexByValue(optionsGrads, nValues.currentGrad);
         setSelGrads(optionsGrads[index]);
         setRadioGender(nValues.Gender);
-        setDateGrad(new Date(nValues.GradDate));
+        setDateGrad(Date(nValues.GradDate));
         setLoaded(true);
       } catch (error) {
         console.log(error);
@@ -149,6 +197,34 @@ const BasicInfo = () => {
     setDateGrad(e);
   };
 
+  const handleDateChange = (date, name) => {
+    //  console.log('------------call back');
+    //  console.log(name);
+    //  console.log(date);
+    switch (name) {
+      case 'currentGrad':
+        setDateGrad(date);
+        values.GradDate = date;
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const handleSelectChange = (level, name) => {
+    // console.log('----select back');
+    switch (name) {
+      case 'currentGrad':
+        setSelGrads(level);
+        values.currentGrad = level;
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const handleClick = async (e) => {
     const url = process.env.HOST_URI + `api/baseballInfo/${member}`;
     values.member = member;
@@ -171,41 +247,9 @@ const BasicInfo = () => {
       <div className={styles.contant}>
         <Row>
           <p className={styles.textorange}>若以下資料有不便回答者 可填入N</p>
-          <Col lg='5'>
-            <Form.Label htmlFor='ChineseName' className={styles.colLeftMain}>
-              *中文姓名
-              <p className={styles.colLeftSub}>*Preferred Name</p>
-            </Form.Label>{' '}
-          </Col>
-          <Col lg='7'>
-            <FormControl
-              id='ChineseName'
-              type='text'
-              className={styles.colRightMain}
-              name='ChineseName'
-              onChange={handleInputChange}
-              value={values.ChineseName}
-            />
-            <Form.Label className={styles.colRightSub}>{errors.ChineseName}</Form.Label>{' '}
-          </Col>
 
-          <Col lg='5'>
-            <Form.Label htmlFor='PassportName' className={styles.colLeftMain}>
-              *護照英文名
-              <p className={styles.colLeftSub}>*First Name and Last Name</p>
-            </Form.Label>{' '}
-          </Col>
-          <Col lg='7'>
-            <FormControl
-              id='PassportName'
-              type='text'
-              className={styles.colRightMain}
-              name='PassportName'
-              onChange={handleInputChange}
-              value={values.PassportName}
-            />
-            <Form.Label className={styles.colRightSub}>{errors.PassportName}</Form.Label>{' '}
-          </Col>
+          <TextInput configText={ChineseName} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={PassportName} handleFunc={handleInputChange} values={values} error={errors} />
 
           <Col lg='5'>
             <Form.Label type='radio' className={styles.colLeftMain}>
@@ -246,75 +290,10 @@ const BasicInfo = () => {
               </div>
             </Form>
           </Col>
-
-          <Col lg='5'>
-            <Form.Label htmlFor='Height' className={styles.colLeftMain}>
-              身高(公分)
-              <p className={styles.colLeftSub}>Height (cm)</p>
-            </Form.Label>{' '}
-          </Col>
-          <Col lg='7'>
-            <FormControl
-              id='Height'
-              type='number'
-              className={styles.colRightMain}
-              name='Height'
-              onChange={handleInputChange}
-              value={values.Height}
-            />
-            <Form.Label className={styles.colRightSub}>{errors.Height}</Form.Label>{' '}
-          </Col>
-          <Col lg='5'>
-            <Form.Label htmlFor='Weight' className={styles.colLeftMain}>
-              體重(公斤)
-              <p className={styles.colLeftSub}>Weight(kg)</p>
-            </Form.Label>{' '}
-          </Col>
-          <Col lg='7'>
-            <FormControl
-              id='Weight'
-              type='number'
-              className={styles.colRightMain}
-              name='Weight'
-              onChange={handleInputChange}
-              value={values.Weight}
-            />
-            <Form.Label className={styles.colRightSub}>{errors.Weight}</Form.Label>{' '}
-          </Col>
-          <Col lg='5'>
-            <Form.Label htmlFor='currentGrad' className={styles.colLeftMain}>
-              年級
-              <p className={styles.colLeftSub}>School Grad Year</p>
-            </Form.Label>{' '}
-          </Col>
-          <Col lg='7'>
-            <Select
-              placeholder='Select Grad'
-              className={styles.rightSelect}
-              name='currentGrad'
-              value={selGrads}
-              autosize={true}
-              id='currentGrad'
-              options={optionsGrads}
-            />
-          </Col>
-          <Col lg='5'>
-            <Form.Label htmlFor='GradDate' className={styles.colLeftMain}>
-              高中預計畢業日期(年月)
-              <p className={styles.colLeftSub}>High School Expected Graduation Date</p>
-            </Form.Label>{' '}
-          </Col>
-          <Col lg='7'>
-            <DatePicker
-              id='GradDate'
-              className={styles.rightSelect}
-              selected={dateGrad}
-              onChange={handleSetDate}
-              name='GradDate'
-              dateFormat='MM/yyyy'
-              showMonthYearPicker
-            />
-          </Col>
+          <TextInput configText={Height} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={Weight} handleFunc={handleInputChange} values={values} error={errors} />
+          <SelectInput configText={CurrentGrad} handleFunc={handleSelectChange} values={values} error={errors} />
+          <DateInput configText={GradDate} handleFunc={handleDateChange} values={values} error={errors} />
         </Row>
         <Row>
           <br></br>
