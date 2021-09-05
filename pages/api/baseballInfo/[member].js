@@ -1,5 +1,5 @@
-import dbConnect from '../../../utils/dbConnect';
-import BaseballInfo from '../../../models/dbBaseballinfos';
+import dbConnect from "../../../utils/dbConnect";
+import BaseballInfo from "../../../models/dbBaseballinfos";
 dbConnect();
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -10,9 +10,7 @@ export default async (req, res) => {
   } = req;
 
   switch (method) {
-    case 'GET':
-      console.log('----get');
-
+    case "GET":
       try {
         const baseballinfo = await BaseballInfo.findOne({ member }).exec();
         console.log(baseballinfo);
@@ -24,12 +22,16 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-    case 'PUT':
+    case "PUT":
       try {
-        const baseballinfo = await BaseballInfo.findByIdAndUpdate(req.body._id, req.body, {
-          new: true,
-          runValmemberators: true,
-        });
+        const baseballinfo = await BaseballInfo.findByIdAndUpdate(
+          req.body._id,
+          req.body,
+          {
+            new: true,
+            runValmemberators: true,
+          }
+        );
         if (!baseballinfo) {
           return res.status(400).json({ success: false });
         }
@@ -39,9 +41,11 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-    case 'DELETE':
+    case "DELETE":
       try {
-        const deletedBaseballInfo = await BaseballInfo.deleteOne({ member: member });
+        const deletedBaseballInfo = await BaseballInfo.deleteOne({
+          member: member,
+        });
         if (!deletedBaseballInfo) {
           return res.status(400).json({ success: false });
         }

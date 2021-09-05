@@ -1,15 +1,15 @@
 import { Form, Col } from "react-bootstrap";
 import styles from "../styles/Contant.module.css";
-import Select from "react-select";
-const SelectInput = (props) => {
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+const MonthInput = (props) => {
   //  console.log(props.values);
   // console.log(props.values[props.configText.name]);
   // console.log(props.handleFunc);
 
-  const handleLocalChange = (level) => {
-    // console.log('----------Select');
-    // console.log(level);
-    props.handleFunc(level, props.configText.name);
+  const handleLocalChange = (date) => {
+    props.handleFunc(date, props.configText.name);
   };
 
   return (
@@ -24,15 +24,15 @@ const SelectInput = (props) => {
         </Form.Label>{" "}
       </Col>
       <Col lg="7">
-        <Select
-          placeholder="Select Level"
-          className={styles.rightSelect}
-          name={props.configText.name}
-          autosize={true}
-          value={props.values}
-          onChange={handleLocalChange}
+        <DatePicker
           id={props.configText.name}
-          options={props.configText.options}
+          name={props.configText.name}
+          className={styles.rightSelect}
+          selected={props.values[props.configText.name]}
+          onChange={handleLocalChange}
+          dateFormatCalendar={props.configText.format}
+          dateFormat="MM/yyyy"
+          showMonthYearPicker
         />
         <Form.Label className={styles.colRightSub}>
           {props.error[props.configText.name]}
@@ -42,4 +42,4 @@ const SelectInput = (props) => {
   );
 };
 
-export default SelectInput;
+export default MonthInput;

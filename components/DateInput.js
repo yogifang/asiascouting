@@ -1,7 +1,7 @@
-import { Form, Col } from 'react-bootstrap';
-import styles from '../styles/Contant.module.css';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { Form, Col } from "react-bootstrap";
+import styles from "../styles/Contant.module.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const DateInput = (props) => {
   //  console.log(props.values);
@@ -14,24 +14,29 @@ const DateInput = (props) => {
 
   return (
     <>
-      <Col lg='5'>
-        <Form.Label htmlFor={props.configText.name} className={styles.colLeftMain}>
+      <Col lg="5">
+        <Form.Label
+          htmlFor={props.configText.name}
+          className={styles.colLeftMain}
+        >
           {props.configText.main}
           <p className={styles.colLeftSub}>{props.configText.sub}</p>
-        </Form.Label>{' '}
+        </Form.Label>{" "}
       </Col>
-      <Col lg='7'>
+      <Col lg="7">
         <DatePicker
           id={props.configText.name}
           name={props.configText.name}
           className={styles.rightSelect}
           selected={props.values[props.configText.name]}
           onChange={handleLocalChange}
-          showYearDropdown
           dateFormatCalendar={props.configText.format}
           scrollableYearDropdown
+          showYearDropdown
         />
-        <Form.Label className={styles.colRightSub}>{props.error[props.configText.name]}</Form.Label>{' '}
+        <Form.Label className={styles.colRightSub}>
+          {props.error[props.configText.name]}
+        </Form.Label>{" "}
       </Col>
     </>
   );

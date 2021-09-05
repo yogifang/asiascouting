@@ -1,56 +1,60 @@
-import dbConnect from '../../../utils/dbConnect';
-import Subjects from '../../../models/dbSubjects';
+import dbConnect from "../../../utils/dbConnect";
+import Subjects from "../../../models/dbSubjects";
 dbConnect();
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
-    const {
-        query: { member },
-        method
-    } = req;
-    
-    switch (method) {
-        case 'GET':
-            try {
-                const baseballinfo = await Subjects.findOne({member}).exec();
-                console.log(baseballinfo) ;
-                if (!baseballinfo) {
-                    return res.status(400).json({ success: false });
-                }
-                res.status(200).json({ success: true, data: baseballinfo });
-            } catch (error) {
-                res.status(400).json({ success: false });
-            }
-            break;
-        case 'PUT':
-            try {
-                const baseballinfo = await Subjects.findByIdAndUpdate(member, req.body, {
-                    new: true,
-                    runValmemberators: true
-                });
+  const {
+    query: { member },
+    method,
+  } = req;
 
-                if (!baseballinfo) {
-                    return res.status(400).json({ success: false });
-                }
+  switch (method) {
+    case "GET":
+      try {
+        const subject = await Subjects.findOne({ member }).exec();
+        console.log(subject);
+        if (!subject) {
+          return res.status(400).json({ success: false });
+        }
+        res.status(200).json({ success: true, data: subject });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+      break;
+    case "PUT":
+      try {
+        const subject = await Subjects.findByIdAndUpdate(
+          req.body._id,
+          req.body,
+          {
+            new: true,
+            runValmemberators: true,
+          }
+        );
 
-                res.status(200).json({ success: true, data: baseballinfo });
-            } catch (error) {
-                res.status(400).json({ success: false });
-            }
-            break;
-        case 'DELETE':
-            try {
-                const deletedSubjects = await Subjects.deleteOne({ member: member });
-                if (!deletedSubjects) {
-                    return res.status(400).json({ success: false })
-                }
-                res.status(200).json({ success: true, data: {} });
-            } catch (error) {
-                res.status(400).json({ success: false })
-            }
-            break;
-        default:
-            res.status(400).json({ success: false })
-            break;
-    }
-  };
+        if (!subject) {
+          return res.status(400).json({ success: false });
+        }
+
+        res.status(200).json({ success: true, data: subject });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+      break;
+    case "DELETE":
+      try {
+        const deletedSubjects = await Subjects.deleteOne({ member: member });
+        if (!deletedSubjects) {
+          return res.status(400).json({ success: false });
+        }
+        res.status(200).json({ success: true, data: {} });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+      break;
+    default:
+      res.status(400).json({ success: false });
+      break;
+  }
+};
