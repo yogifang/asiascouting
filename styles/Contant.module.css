@@ -20,20 +20,20 @@
   flex-wrap: wrap;
   flex-direction: column;
   width: 1000px !important;
-  height: 1000px;
+  height: 1100px;
   background-color: #fff;
+  overflow-y: auto;
 }
 
-.row {
-  width: 100%;
+.rowLine {
+  flex: 0 auto;
   margin-top: 0px;
   margin-left: 0px;
+  margin-bottom: 0px;
   padding-top: 0px;
   display: flex;
-  width: 1000px !important;
-  height: 1000px;
-  min-height: 64px !important;
-  background-color: #fff;
+  height: 40px;
+  min-height: 40px !important;
 }
 
 .btnAppLogin {
@@ -232,7 +232,7 @@
   margin-bottom: 10px;
 }
 .bgboarder {
-  order: 1px solid #f7931e;
+  border: 1px solid #f7931e;
 }
 .rightSelect {
   display: block;

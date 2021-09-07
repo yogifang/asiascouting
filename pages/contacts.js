@@ -67,9 +67,8 @@ const Contacts = () => {
   const [country, setCountry] = useState(optionsCountry[0]);
   const { memberEmail } = useContext(Context);
   const { setValueTabs } = useContext(Context);
+
   const selCountryChangeHandler = (country) => {
-    console.log(country);
-    console.log(optionsCountry[30]);
     setCountry(country);
     values.Nationality = country.label;
   };
@@ -83,10 +82,9 @@ const Contacts = () => {
 
   const findIndexByValue = (options, label) => {
     let index = options.findIndex((options) => options.label === label);
-    console.log(index);
+
     if (index === -1) index = 0;
     return index;
-    //console.log(options[4].label);
   };
 
   const validate = (fieldValues = values) => {
@@ -133,15 +131,10 @@ const Contacts = () => {
               break;
           }
         }
-
         setValues(nValues);
         const index = findIndexByValue(optionsCountry, nValues.Nationality);
-        console.log(index);
-
         setCountry(optionsCountry[index]);
         setBirthday(Date.parse(nValues.birthday));
-        console.log(nValues);
-        console.log(values);
       } catch (error) {
         console.log(error);
       }
@@ -179,19 +172,34 @@ const Contacts = () => {
   };
 
   const handleClick = async (e) => {
-    const url = process.env.HOST_URI + `api/contacts/${member}`;
-    values.member = member;
-    console.log(values);
-    const result = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    const data = await result.json();
-    console.log(data);
-    alert("Data is Saved!!");
+    if (values._id === "") {
+      const url = process.env.HOST_URI + `api/contacts/`;
+      values.member = member;
+
+      const result = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      alert("Data is Saved!!");
+    } else {
+      const url = process.env.HOST_URI + `api/contacts/${member}`;
+      values.member = member;
+
+      const result = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      console.log(data);
+      alert("Data is Updated!!");
+    }
   };
   return (
     <Container className={styles.container}>
@@ -224,7 +232,7 @@ const Contacts = () => {
           />
           <SelectInput
             configText={Nationality}
-            handleFunc={handleSelectChange}
+            handleFunc={selCountryChangeHandler}
             values={country}
             error={errors}
           />

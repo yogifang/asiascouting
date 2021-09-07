@@ -216,6 +216,104 @@ const HBBB = {
   name2: "BBB",
 };
 
+const EraEr2 = {
+  type: "number",
+  main1: "防禦率",
+  sub1: "ERA",
+  name1: "lERA",
+  main2: "自責分",
+  sub2: "ER",
+  name2: "lER",
+};
+
+const IpHr = {
+  type: "number",
+  main1: "投球局數",
+  sub1: "IP",
+  name1: "lIP",
+  main2: "被全壘打",
+  sub2: "HR",
+  name2: "lBHR",
+};
+const HHB = {
+  type: "number",
+  main1: "被安打",
+  sub1: "H",
+  name1: "lBH",
+  main2: "觸身球",
+  sub2: "HB",
+  name2: "lHB",
+};
+
+const RBB = {
+  type: "number",
+  main1: "被得分",
+  sub1: "R",
+  name1: "lBRUN",
+  main2: "保送",
+  sub2: "BB",
+  name2: "lBB",
+};
+
+const OnlyK = {
+  type: "number",
+  main1: "",
+  sub1: "",
+  name1: "",
+  main2: "三振",
+  sub2: "K",
+  name2: "lK",
+};
+
+const Avg2B2 = {
+  type: "number",
+  main1: "打擊率",
+  sub1: "AVG",
+  name1: "lAVG",
+  main2: "二壘安打",
+  sub2: "2B",
+  name2: "lHit2B",
+};
+
+const Ops3B2 = {
+  type: "number",
+  main1: "攻擊指數",
+  sub1: "OPS",
+  name1: "lOPS",
+  main2: "三壘安打",
+  sub2: "3B",
+  name2: "lHit3B",
+};
+const RHR = {
+  type: "number",
+  main1: "得分",
+  sub1: "R",
+  name1: "lRUN",
+  main2: "全壘打",
+  sub2: "HR",
+  name2: "lHitHR",
+};
+
+const HK = {
+  type: "number",
+  main1: "安打",
+  sub1: "H",
+  name1: "lHits",
+  main2: "被三振",
+  sub2: "K",
+  name2: "lBK",
+};
+
+const OnlyBB = {
+  type: "number",
+  main1: "",
+  sub1: "",
+  name1: "",
+  main2: "被保送",
+  sub2: "BB",
+  name2: "lBBB",
+};
+
 const LabelSprint = {
   main: "速度",
   sub: "Sprint meansurements (time)",
@@ -230,26 +328,20 @@ const LabelPitching = {
   sub: "SPitching Performance & Career Stats",
 };
 const BaseballPerformance = () => {
+  const { member, setMember } = useContext(Context);
+  const [latestGameDate, setLatestGameDate] = useState(new Date());
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ("rankDomestic" in fieldValues)
-      temp.rankDomestic = fieldValues.rankDomestic
-        ? ""
-        : "This field is required.";
-    if ("englishName" in fieldValues)
-      temp.englishName = fieldValues.englishName
-        ? ""
-        : "This field is required.";
-    if ("email" in fieldValues)
-      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
-        ? ""
-        : "Email is not valid.";
-    if ("mobile" in fieldValues)
-      temp.mobile =
-        fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required.";
-    if ("departmentId" in fieldValues)
-      temp.departmentId =
-        fieldValues.departmentId.length !== 0 ? "" : "This field is required.";
+
+    if ("latestGameDate" in fieldValues) {
+    } else {
+      //console.log(fieldValues);
+      const keyname = Object.getOwnPropertyNames(fieldValues);
+      temp[keyname] =
+        fieldValues[keyname] < 0 ? (temp[keyname] = "不得小於0") : "";
+    }
+
     setErrors({
       ...temp,
     });
@@ -260,26 +352,80 @@ const BaseballPerformance = () => {
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
 
+  useEffect(() => {
+    const getBaseball = async () => {
+      try {
+        const url = process.env.HOST_URI + `api/baseballPerformance/${member}`;
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const Data = await res.json();
+        console.log(Data);
+        let field;
+        let nValues = {};
+        for (field in values) {
+          //  console.log(field);
+          switch (field) {
+            case "latestGameDate":
+              nValues[field] = Date.parse(Data.data[field]);
+              break;
+            default:
+              nValues[field] = Data.data[field];
+              break;
+          }
+
+          // setValues(field, Data.data[field]);
+        }
+        setValues(nValues);
+        setLatestGameDate(Date.parse(nValues.latestGameDate));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getBaseball();
+    //values.member = recMember.email ;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleDateChange = (date, name) => {
     switch (name) {
       case "latestGameDate":
-        setLatestGameDate(new Date(date));
+        setLatestGameDate(Date.parse(date));
         values.latestGameDate = date;
         break;
-      case "best10MDate":
-        setBest10MDate(new Date(date));
-        values.best10MDate = date;
-        break;
-      case "best50M3x40Date":
-        setBest50M3x40Date(new Date(date));
-        values.best50M3x40Date = date;
-        break;
-      case "best50M3x20Date":
-        setBest50M3x20Date(new Date(date));
-        values.best50M3x20Date = date;
-        break;
+
       default:
         break;
+    }
+  };
+
+  const handleClick = async (e) => {
+    if (values._id === "") {
+      const url = process.env.HOST_URI + `api/baseballPerformance/`;
+      values.member = member;
+      const result = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      alert("Data is Saved!!");
+    } else {
+      const url = process.env.HOST_URI + `api/baseballPerformance/${member}`;
+      values.member = member;
+      const result = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      alert("Data is Updated!!");
     }
   };
 
@@ -342,13 +488,13 @@ const BaseballPerformance = () => {
               error={errors}
             />
             <TextInput2
-              configText={GBhr}
+              configText={Hbb}
               handleFunc={handleInputChange}
               values={values}
               error={errors}
             />
             <TextInput2
-              configText={GBhr}
+              configText={Rk}
               handleFunc={handleInputChange}
               values={values}
               error={errors}
@@ -410,38 +556,96 @@ const BaseballPerformance = () => {
               </p>
             </div>
             <Col lg="6">
-              <Col lg="12">
+              <Col lg="12" className={styles.bgboarder}>
                 <p className={styles.textorange}>
                   <span>投球成績</span>
                   <br />
                   <span>Pitching Performance</span>
                 </p>
-                <Col lg="12">
-                  <TextInput2
-                    configText={EraEr}
-                    handleFunc={handleInputChange}
-                    values={values}
-                    error={errors}
-                  />
-                  <TextInput2
-                    configText={EraEr}
-                    handleFunc={handleInputChange}
-                    values={values}
-                    error={errors}
-                  />
-                </Col>
+
+                <TextInput4
+                  configText={EraEr2}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+                <TextInput4
+                  configText={IpHr}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+
+                <TextInput4
+                  configText={HHB}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+                <TextInput4
+                  configText={RBB}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+                <TextInput4
+                  configText={OnlyK}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+              </Col>
+            </Col>
+            <Col lg="6">
+              <Col lg="12" className={styles.bgboarder}>
+                <p className={styles.textorange}>
+                  <span>打擊成績</span>
+                  <br />
+                  <span>Hitting Performance</span>
+                </p>
+
+                <TextInput4
+                  configText={Avg2B2}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+                <TextInput4
+                  configText={Ops3B2}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+                <TextInput4
+                  configText={RHR}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+                <TextInput4
+                  configText={HK}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
+
+                <TextInput4
+                  configText={OnlyBB}
+                  handleFunc={handleInputChange}
+                  values={values}
+                  error={errors}
+                />
               </Col>
             </Col>
           </Row>
           <Row>
-            <Col lg="12">
-              <TextInput2
-                configText={EraEr}
-                handleFunc={handleInputChange}
-                values={values}
-                error={errors}
-              />
-            </Col>
+            <br></br>
+            <Button
+              justification="right"
+              onClick={handleClick}
+              variant="secondary"
+              className={styles.btnAppNextSmall}
+            ></Button>{" "}
           </Row>
         </div>
       </div>

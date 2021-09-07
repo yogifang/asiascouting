@@ -12,7 +12,7 @@ const TextInput2 = (props) => {
 
   return (
     <>
-      <Row>
+      <Row className={styles.rowLine}>
         <Col lg="4">
           <Form.Label
             htmlFor={props.configText.name1}
@@ -31,6 +31,9 @@ const TextInput2 = (props) => {
             onChange={handleLocalChange}
             value={props.values[props.configText.name1]}
           />
+          <Form.Label className={styles.colRightSub2}>
+            {props.error[props.configText.name1]}
+          </Form.Label>
         </Col>
 
         <Col lg="1">
@@ -51,6 +54,9 @@ const TextInput2 = (props) => {
             onChange={handleLocalChange}
             value={props.values[props.configText.name2]}
           />
+          <Form.Label className={styles.colRightSub2}>
+            {props.error[props.configText.name2]}
+          </Form.Label>
         </Col>
       </Row>
     </>

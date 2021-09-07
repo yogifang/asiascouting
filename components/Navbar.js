@@ -35,7 +35,7 @@ const AppNavbar = () => {
         <Button
           size="sm"
           variant="light"
-          onClick={(e) => handleButtonClick(e, "/")}
+          onClick={(e) => handleButtonClick(e, "/basicinfo")}
           className={member === "" ? "disabled" : "disabled:false"}
         >
           <span>

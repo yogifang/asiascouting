@@ -163,24 +163,21 @@ const Shooting = () => {
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ("rankDomestic" in fieldValues)
-      temp.rankDomestic = fieldValues.rankDomestic
-        ? ""
-        : "This field is required.";
-    if ("englishName" in fieldValues)
-      temp.englishName = fieldValues.englishName
-        ? ""
-        : "This field is required.";
-    if ("email" in fieldValues)
-      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
-        ? ""
-        : "Email is not valid.";
-    if ("mobile" in fieldValues)
-      temp.mobile =
-        fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required.";
-    if ("departmentId" in fieldValues)
-      temp.departmentId =
-        fieldValues.departmentId.length !== 0 ? "" : "This field is required.";
+    const keyname = Object.getOwnPropertyNames(fieldValues);
+
+    switch (keyname[0]) {
+      case "lastestScore":
+      case "best10M60R":
+      case "best50M3x40":
+      case "best50M3x20":
+      case "rankNational":
+      case "rankWorld":
+        temp[keyname] =
+          fieldValues[keyname] < 0 ? (temp[keyname] = "不得小於0") : "";
+        break;
+      default:
+        break;
+    }
     setErrors({
       ...temp,
     });
@@ -288,19 +285,34 @@ const Shooting = () => {
     useForm(initialFValues, true, validate);
 
   const handleClick = async (e) => {
-    const url = process.env.HOST_URI + `api/shootingPerformance/${member}`;
-    values.member = member;
-    console.log(values);
-    const result = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    const data = await result.json();
-    console.log(data);
-    alert("Data is Saved!!");
+    if (values._id === "") {
+      const url = process.env.HOST_URI + `api/shootingPerformance/`;
+      values.member = member;
+
+      const result = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      alert("Data is Saved!!");
+    } else {
+      const url = process.env.HOST_URI + `api/shootingPerformance/${member}`;
+      values.member = member;
+
+      const result = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+
+      alert("Data is Updated!!");
+    }
   };
 
   return (

@@ -44,6 +44,8 @@ const optionsHands = [
   { value: "RPRH", label: "右投右打" },
   { value: "LPRH", label: "左投右打" },
   { value: "RPLH", label: "右投左打" },
+  { value: "LPDH", label: "左投兩打" },
+  { value: "RPDH", label: "右投兩打" },
 ];
 
 const optionsGrads = [
@@ -103,8 +105,29 @@ const GradDate = {
   name: "GradDate",
 };
 
+const PrimePostion = {
+  options: optionsPosition,
+  main: "*守備位置",
+  sub: "*Position",
+  name: "PriPosition",
+};
+
+const SecondPostion = {
+  options: optionsPosition,
+  main: "*第二守備位置",
+  sub: "*Second Position(s)",
+  name: "SecPosition",
+};
+
+const Handers = {
+  options: optionsHands,
+  main: "投/打慣用手",
+  sub: "B/T",
+  name: "LeftRightHand",
+};
+
 const BasicInfo = () => {
-  const { member, setMember } = useContext(Context);
+  const { member, setMember, sportItem, setSportItem } = useContext(Context);
   const [radioGenger, setRadioGender] = useState("Male");
   const [selPriPosition, setSelPriPosition] = useState(optionsPosition[0]);
   const [selSecPosition, setSelSecPosition] = useState(optionsPosition[1]);
@@ -112,6 +135,7 @@ const BasicInfo = () => {
   const [selGrads, setSelGrads] = useState(optionsGrads[0]);
   const [dateGrad, setDateGrad] = useState(Date.now());
   const [loaded, setLoaded] = useState(false);
+
   const findIndexByValue = (options, value) => {
     const index = options.findIndex((options) => options.value === value);
     return index;
@@ -135,11 +159,8 @@ const BasicInfo = () => {
         for (field in values) {
           //  console.log(field);
           if (field !== "GradDate") {
-            //  console.log(Data.data[field]);
             nValues[field] = Data.data[field];
           } else {
-            //    console.log(Data.data[field]);
-            //    console.log(field);
             nValues[field] = Date.parse(Data.data[field]);
           }
 
@@ -170,14 +191,17 @@ const BasicInfo = () => {
 
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ("ChineseName" in fieldValues)
-      temp.ChineseName = fieldValues.ChineseName ? "" : "此欄位不得空白。";
-    if ("PassportName" in fieldValues)
-      temp.PassportName = fieldValues.PassportName ? "" : "此欄位不得空白。";
-    if ("Height" in fieldValues)
-      temp.Height = fieldValues.Height ? "" : "此欄位不得空白。";
-    if ("Weight" in fieldValues)
-      temp.Weight = fieldValues.Weight ? "" : "此欄位不得空白。";
+    const keyname = Object.getOwnPropertyNames(fieldValues);
+
+    switch (keyname[0]) {
+      case "Height":
+      case "Weight":
+        temp[keyname] =
+          fieldValues[keyname] < 0 ? (temp[keyname] = "不得小於0") : "";
+        break;
+      default:
+        break;
+    }
     setErrors({
       ...temp,
     });
@@ -218,27 +242,51 @@ const BasicInfo = () => {
         setSelGrads(level);
         values.currentGrad = level.value;
         break;
-
+      case "PriPosition":
+        setSelPriPosition(level);
+        values.PriPosition = level.value;
+        break;
+      case "SecPosition":
+        setSelSecPosition(level);
+        values.SecPosition = level.value;
+        break;
+      case "LeftRightHand":
+        setSelHands(level);
+        values.LeftRightHand = level.value;
+        break;
       default:
         break;
     }
   };
 
   const handleClick = async (e) => {
-    const url = process.env.HOST_URI + `api/baseballInfo/${member}`;
     values.member = member;
-    console.log(values);
 
-    const result = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    const data = await result.json();
-    console.log(data);
-    alert("Data is Saved!!");
+    if (values._id === "") {
+      const url = process.env.HOST_URI + `api/baseballInfo/`;
+      const result = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      //  console.log(data);
+      alert("Data is Saved!!");
+    } else {
+      const url = process.env.HOST_URI + `api/baseballInfo/${member}`;
+      const result = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      console.log(data);
+      alert("Data is Updated!!");
+    }
   };
 
   return (
@@ -300,6 +348,30 @@ const BasicInfo = () => {
               </div>
             </Form>
           </Col>
+          {sportItem === "baseball" ? (
+            <>
+              <SelectInput
+                configText={PrimePostion}
+                handleFunc={handleSelectChange}
+                values={selPriPosition}
+                error={errors}
+              />
+
+              <SelectInput
+                configText={SecondPostion}
+                handleFunc={handleSelectChange}
+                values={selSecPosition}
+                error={errors}
+              />
+              <SelectInput
+                configText={Handers}
+                handleFunc={handleSelectChange}
+                values={selHands}
+                error={errors}
+              />
+            </>
+          ) : null}
+
           <TextInput
             configText={Height}
             handleFunc={handleInputChange}

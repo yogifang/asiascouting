@@ -93,6 +93,14 @@ const Subjects = () => {
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
 
+    if ("IntentMajor" in fieldValues) {
+    } else {
+      console.log(fieldValues);
+      const keyname = Object.getOwnPropertyNames(fieldValues);
+      temp[keyname] =
+        fieldValues[keyname] < 0 ? (temp[keyname] = "不得小於0") : "";
+    }
+
     setErrors({
       ...temp,
     });
@@ -131,19 +139,31 @@ const Subjects = () => {
   }, []);
 
   const handleClick = async (e) => {
-    const url = process.env.HOST_URI + `api/subjects/${member}`;
-    values.member = member;
-    console.log(values);
-    const result = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    const data = await result.json();
-    console.log(data);
-    alert("Data is Saved!!");
+    if (values._id === "") {
+      const url = process.env.HOST_URI + `api/subjects/`;
+      values.member = member;
+      const result = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      alert("Data is Saved!!");
+    } else {
+      const url = process.env.HOST_URI + `api/subjects/${member}`;
+      values.member = member;
+      const result = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await result.json();
+      alert("Data is Updated!!");
+    }
   };
 
   return (

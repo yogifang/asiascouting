@@ -1,5 +1,5 @@
-import dbConnect from '../../../utils/dbConnect';
-import BaseballInfo from '../../../models/dbBaseballinfos';
+import dbConnect from "../../../utils/dbConnect";
+import BaseballInfo from "../../../models/dbBaseballinfos";
 dbConnect();
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -7,8 +7,7 @@ export default async (req, res) => {
   const { method } = req;
 
   switch (method) {
-    case 'GET':
-      console.log('get----------index');
+    case "GET":
       try {
         const baseballinfo = await BaseballInfo.find({});
         res.status(200).json({ success: true, data: baseballinfo });
@@ -16,9 +15,9 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-    case 'POST':
+    case "POST":
+      req.body._id = null;
       try {
-        console.log('post----------index');
         const baseballinfo = await BaseballInfo.create(req.body);
 
         res.status(201).json({ success: true, data: baseballinfo });

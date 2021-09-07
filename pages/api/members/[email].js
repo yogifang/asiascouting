@@ -1,5 +1,5 @@
-import dbConnect from '../../../utils/dbConnect';
-import Connects from '../../../models/dbMembers';
+import dbConnect from "../../../utils/dbConnect";
+import Connects from "../../../models/dbMembers";
 dbConnect();
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -9,13 +9,11 @@ export default async (req, res) => {
     method,
   } = req;
 
-  console.log('----------088-------------');
-  console.log(email);
-  var params = email.split('&');
+  var params = email.split("&");
   let userEmail = params[0];
   console.log(userEmail);
   switch (method) {
-    case 'GET':
+    case "GET":
       try {
         const member = await Connects.findOne({ email: userEmail }).exec();
         console.log(member);
@@ -31,12 +29,16 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-    case 'PUT':
+    case "PUT":
       try {
-        const members = await Connects.findByIdAndUpdate(email, req.body, {
-          new: true,
-          runValmemberators: true,
-        });
+        const members = await Connects.findByIdAndUpdate(
+          req.body._id,
+          req.body,
+          {
+            new: true,
+            runValmemberators: true,
+          }
+        );
 
         if (!baseballinfo) {
           return res.status(400).json({ success: false });
@@ -47,7 +49,7 @@ export default async (req, res) => {
         res.status(400).json({ success: false });
       }
       break;
-    case 'DELETE':
+    case "DELETE":
       try {
         const deletedConnects = await Connects.deleteOne({ email: email });
         if (!deletedConnects) {
