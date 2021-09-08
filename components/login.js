@@ -13,6 +13,20 @@ const initialFValues = {
   isPrivacy: "",
 };
 
+const InputEmail = {
+  type: "text",
+  main: "請輸入您的聯絡信箱",
+  sub: "Enter your email",
+  name: "email",
+};
+
+const InputPassword = {
+  type: "password",
+  main: "輸入密碼",
+  sub: "Enter password",
+  name: "password",
+};
+
 const Login = () => {
   const router = useRouter();
   const { member, setMember, sportItem, setSportItem } = useContext(Context);
@@ -79,45 +93,18 @@ const Login = () => {
   return (
     <div className={styles.contant}>
       <Row>
-        <Col lg="6">
-          <Form.Label htmlFor="user_email" className={styles.colLeftMain}>
-            請輸入您的聯絡信箱
-            <p className={styles.colLeftSub}>Enter your email</p>
-          </Form.Label>{" "}
-        </Col>
-        <Col lg="6">
-          <FormControl
-            id="user_email"
-            type="text"
-            className={styles.colRightMain}
-            name="email"
-            onChange={handleInputChange}
-            value={values.email}
-          />
-          <Form.Label className={styles.colRightSub}>{errors.email}</Form.Label>{" "}
-        </Col>
-      </Row>
-      <br />
-      <Row>
-        <Col lg="6">
-          <Form.Label htmlFor="user_password" className={styles.colLeftMain}>
-            輸入密碼
-            <p className={styles.colLeftSub}>Input Your password</p>
-          </Form.Label>{" "}
-        </Col>
-        <Col lg="6">
-          <FormControl
-            id="user_password"
-            type="password"
-            className={styles.colRightMain}
-            name="password"
-            value={values.password}
-            onChange={handleInputChange}
-          />
-          <Form.Label className={styles.colRightSub}>
-            {errors.password}
-          </Form.Label>{" "}
-        </Col>
+        <TextInput
+          configText={InputEmail}
+          handleFunc={handleInputChange}
+          values={values}
+          error={errors}
+        />
+        <TextInput
+          configText={InputPassword}
+          handleFunc={handleInputChange}
+          values={values}
+          error={errors}
+        />
       </Row>
       <Row>
         <br></br>
