@@ -95,6 +95,18 @@
   background-color: unset !important;
 }
 
+.btnGoogleLogin {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 168px;
+  height: 92px;
+  border: none;
+  background-image: url("../pages/assets/buttons/GoogleLogin.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: unset !important;
+}
+
 .btnAppCreate:hover {
   box-shadow: 10px 5px 5px black;
 }
@@ -241,4 +253,32 @@
   font-size: 16px;
   margin-bottom: 0;
   width: 60%;
+}
+.sheetcell {
+  height: 50px;
+}
+.pagemain {
+  font-size: 10px;
+  text-align: left;
+}
+.pagevalue {
+  font-size: 14px;
+  text-align: left;
+  font-weight: bold;
+}
+.pagevaluebig {
+  font-size: 20px;
+  text-align: left;
+  font-weight: bold;
+}
+.sidetitle {
+  writing-mode: vertical-lr;
+  color: #ffffff;
+  padding-left: 80px;
+}
+.sidecolumn {
+  background-color: #c0c0c0;
+}
+.bgboarder {
+  border: 1px solid #f7931e;
 }

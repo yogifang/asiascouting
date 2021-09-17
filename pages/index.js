@@ -65,8 +65,8 @@ export default function Home() {
             ></Button>{' '}
           </Col>
           <Col>
-            <Button variant='secondary' onClick={handleGoogleLogin}>
-              Google Login
+            <Button variant='secondary' onClick={handleGoogleLogin} className={styles.btnGoogleLogin}>
+
             </Button>{' '}
           </Col>
         </Row>

@@ -8,9 +8,6 @@ import { useRouter } from "next/router";
 const AppNavbar = () => {
   const { member, setMember, sportItem, setSportItem } = useContext(Context);
   const router = useRouter();
-  //console.log(member);
-  //console.log('Nav-----------');
-  //console.log(sportItem);
 
   const handleButtonClick = (event, path) => {
     // console.log(event);
@@ -66,7 +63,7 @@ const AppNavbar = () => {
         <Button
           size="sm"
           variant="light"
-          onClick={(e) => handleButtonClick(e, "/confirm")}
+          onClick={(e) => handleButtonClick(e, (sportItem === 'shooting') ? "/shootingPage" : "baseballPage")}
           className={member === "" ? "disabled" : "disabled:false"}
         >
           <span>

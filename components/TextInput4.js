@@ -1,7 +1,7 @@
 import { Form, FormControl, Row, Col } from "react-bootstrap";
 import styles from "../styles/Contant.module.css";
 
-const TextInput2 = (props) => {
+const TextInput4 = (props) => {
   //  console.log(props.values);
   // console.log(props.values[props.configText.name]);
   // console.log(props.handleFunc);
@@ -72,4 +72,4 @@ const TextInput2 = (props) => {
   );
 };
 
-export default TextInput2;
+export default TextInput4;
