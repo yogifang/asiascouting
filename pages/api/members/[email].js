@@ -11,18 +11,28 @@ export default async (req, res) => {
 
   var params = email.split("&");
   let userEmail = params[0];
-  console.log(userEmail);
+  let password = params[1];
+
+  // console.log(userEmail);
   switch (method) {
     case "GET":
       try {
         const member = await Connects.findOne({ email: userEmail }).exec();
-        console.log(member);
+        //   console.log(member);
         if (!member) {
           return res.status(400).json({ success: false });
         }
-        if (params[1] === member.password) {
+
+        if (password === 'Google' && member.password === 'Google$Auth') {
+          res.status(200).json({ success: true, data: member });
+          return;
+        }
+
+
+        if (password === member.password) {
           res.status(200).json({ success: true, data: member });
         } else {
+
           res.status(404).json({ success: false });
         }
       } catch (error) {
