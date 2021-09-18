@@ -3,7 +3,7 @@ import styles from "../styles/Contant.module.css";
 import TextInput from "../components/TextInput";
 import SelectInput from "../components/SelectInput";
 import { useForm } from '../components/useForm';
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { Context } from "../components/stores";
 import { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
@@ -41,7 +41,7 @@ const SelectSport = {
 
 const CreateSocial = () => {
 
-
+    const router = useRouter();
     const { member, setMember, sportItem, setSportItem } = useContext(Context);
 
     const [selItem, setSelItem] = useState(optionsSportItem[0]);
