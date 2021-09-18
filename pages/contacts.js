@@ -65,8 +65,7 @@ const Contacts = () => {
   const listOption = new countryList();
   const optionsCountry = useMemo(() => listOption.getData(), []); // eslint-disable-line react-hooks/exhaustive-deps
   const [country, setCountry] = useState(optionsCountry[0]);
-  const { memberEmail } = useContext(Context);
-  const { setValueTabs } = useContext(Context);
+
 
   const selCountryChangeHandler = (country) => {
     setCountry(country);

@@ -95,6 +95,10 @@
   background-color: unset !important;
 }
 
+.btnAppCreate:hover {
+  box-shadow: 10px 5px 5px black;
+}
+
 .btnGoogleLogin {
   display: block !important;
   margin: 0 auto !important;
@@ -107,7 +111,7 @@
   background-color: unset !important;
 }
 
-.btnAppCreate:hover {
+.btnGoogleLogin:hover {
   box-shadow: 10px 5px 5px black;
 }
 

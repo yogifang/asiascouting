@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import styles from '../styles/Contant.module.css';
 import Moment from 'react-moment';
 import OutputText from '../components/OutputText';
+import OutputText2 from '../components/OutputText2';
 import OutputDate from '../components/OutputDate';
 import OutputMonth from '../components/OutputMonth';
 import FileBase64 from 'react-file-base64';
@@ -113,6 +114,7 @@ const BaseballPage = () => {
   const [valPerformance, setValPerformance] = useState(initialBaseballPerformance);
   const [picture, setPicture] = useState({ _id: '', member: '', image: Nobody });
   const [photo, setPhoto] = useState({ image: Nobody });
+
   useEffect(() => {
     const getBaseballInfo = async () => {
       try {
@@ -184,10 +186,11 @@ const BaseballPage = () => {
     };
 
     const getPerformance = async () => {
+      console.log("===========baseball performance =====");
+      console.log(member);
       try {
         const url = process.env.HOST_URI + `api/baseballPerformance/${member}`;
         const res = await fetch(url, {
-          //  const res = await fetch(`https://dashboard-chi-three.vercel.app/api/baseballPerformance/${member}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -198,8 +201,18 @@ const BaseballPage = () => {
         let field;
         let nValues = {};
         for (field in initialBaseballPerformance) {
-          nValues[field] = record.data[field];
+          switch (field) {
+            case "latestGameDate":
+              nValues[field] = Date.parse(record.data[field]);
+
+              break;
+            default:
+              nValues[field] = record.data[field];
+              break;
+          }
+          //  nValues[field] = record.data[field];
         }
+        console.log(nValues);
         setValPerformance(nValues);
       } catch (error) {
         console.log(error);
@@ -379,16 +392,11 @@ const BaseballPage = () => {
                 <h6> Pitching Performance </h6>
                 <OutputText cols='12' name='Throwing' main='Throwing Velocity(mph)' value={valPerformance.Throwing} />
                 <OutputText cols='12' name='BlockPitch' main='Block Pitch(s)' value={valPerformance.BlockPitch} />
-                <OutputText cols='12' name='ERA' main='ERA' value={valPerformance.ERA} />
-                <OutputText cols='12' name='ER' main='ER' value={valPerformance.ER} />
-                <OutputText cols='12' name='gamesP' main='Games' value={valPerformance.gamesP} />
-                <OutputText cols='12' name='BHR' main='BHR' value={valPerformance.BHR} />
-                <OutputText cols='12' name='IP' main='IP' value={valPerformance.IP} />
-                <OutputText cols='12' name='HB' main='HB' value={valPerformance.HB} />
-                <OutputText cols='12' name='BH' main='H' value={valPerformance.BH} />
-                <OutputText cols='12' name='BB' main='BB' value={valPerformance.BB} />
-                <OutputText cols='12' name='BRUN' main='R' value={valPerformance.BRUN} />
-                <OutputText cols='12' name='K' main='K' value={valPerformance.K} />
+                <OutputText2 cols='12' name1='ERA' main1='ERA' value1={valPerformance.ERA} name2='ER' main2='ER' value2={valPerformance.ER} />
+                <OutputText2 cols='12' name1='gamesP' main1='Games' value1={valPerformance.gamesP} name2='BHR' main2='BHR' value2={valPerformance.BHR} />
+                <OutputText2 cols='12' name1='IP' main1='IP' value1={valPerformance.IP} name2='HB' main2='HB' value2={valPerformance.HB} />
+                <OutputText2 cols='12' name1='BH' main1='H' value1={valPerformance.BH} name2='BB' main2='BB' value2={valPerformance.BB} />
+                <OutputText2 cols='12' name1='BRUN' main1='R' value1={valPerformance.BRUN} name2='K' main2='K' value2={valPerformance.K} />
               </div>
             </Col>
             <Col sm='3'>
@@ -401,16 +409,11 @@ const BaseballPage = () => {
               <div className={styles.bgboarder}>
                 <h6> Hit performance </h6>
                 <OutputText cols='12' name='EXIT' main='Exit Velocity(mph)' value={valPerformance.EXIT} />
-                <OutputText cols='12' name='AB' main='AB' value={valPerformance.AB} />
-                <OutputText cols='12' name='AVG' main='AVG' value={valPerformance.AVG} />
-                <OutputText cols='12' name='Hit2B' main='2B' value={valPerformance.Hit2B} />
-                <OutputText cols='12' name='OPS' main='OPS' value={valPerformance.OPS} />
-                <OutputText cols='12' name='Hit3B' main='3B' value={valPerformance.Hit3B} />
-                <OutputText cols='12' name='gamesH' main='Games' value={valPerformance.gamesH} />
-                <OutputText cols='12' name='HR' main='HR' value={valPerformance.HR} />
-                <OutputText cols='12' name='RUN' main='R' value={valPerformance.RUN} />
-                <OutputText cols='12' name='BK' main='K' value={valPerformance.BK} />
-                <OutputText cols='12' name='Hits' main='H' value={valPerformance.Hits} />
+                <OutputText2 cols='12' name1='AB' main1='AB' value1={valPerformance.AB} name2='AVG' main2='AVG' value2={valPerformance.AVG} />
+                <OutputText2 cols='12' name1='Hit2B' main1='2B' value1={valPerformance.Hit2B} name2='OPS' main2='OPS' value2={valPerformance.OPS} />
+                <OutputText2 cols='12' name1='Hit3B' main1='3B' value1={valPerformance.Hit3B} name2='gamesH' main2='Games' value2={valPerformance.gamesH} />
+                <OutputText2 cols='12' name1='HR' main1='HR' value1={valPerformance.HR} name2='RUN' main2='R' value2={valPerformance.RUN} />
+                <OutputText2 cols='12' name1='BK' main1='K' value1={valPerformance.BK} name2='Hits' main2='H' value2={valPerformance.Hits} />
                 <OutputText cols='12' name='BB' main='BB' value={valPerformance.BB} />
               </div>
             </Col>
@@ -425,30 +428,23 @@ const BaseballPage = () => {
                 cols='12'
                 name='latestGameDate'
                 main='Most recent game date'
-                value={valContact.latestGameDate}
+                value={valPerformance.latestGameDate}
               />
               <div className={styles.bgboarder}>
                 <h6> Pitching Performance </h6>
-                <OutputText cols='12' name='lERA' main='ERA' value={valPerformance.lERA} />
-                <OutputText cols='12' name='lER' main='ER' value={valPerformance.lER} />
-                <OutputText cols='12' name='lIP' main='IP' value={valPerformance.lIP} />
-                <OutputText cols='12' name='lBHR' main='HR' value={valPerformance.lBHR} />
-                <OutputText cols='12' name='lBH' main='H' value={valPerformance.lBH} />
-                <OutputText cols='12' name='lHB' main='HB' value={valPerformance.lHB} />
-                <OutputText cols='12' name='lBRUN' main='R' value={valPerformance.lBRUN} />
-                <OutputText cols='12' name='lBB' main='BB' value={valPerformance.lBB} />
+                <OutputText2 cols='12' name1='lERA' main1='ERA' value1={valPerformance.lERA} name2='lER' main2='ER' value2={valPerformance.lER} />
+                <OutputText2 cols='12' name1='lIP' main1='IP' value1={valPerformance.lIP} name2='lBHR' main2='HR' value2={valPerformance.lBHR} />
+                <OutputText2 cols='12' name1='lBH' main1='H' value1={valPerformance.lBH} name2='lHB' main2='HB' value2={valPerformance.lHB} />
+                <OutputText2 cols='12' name1='lBRUN' main1='R' value1={valPerformance.lBRUN} name2='lBB' main2='BB' value2={valPerformance.lBB} />
                 <OutputText cols='12' name='lK' main='K' value={valPerformance.lK} />
               </div>
               <div className={styles.bgboarder}>
                 <h6> Hitting Performance </h6>
-                <OutputText cols='12' name='lAVG' main='AVG' value={valPerformance.lAVG} />
-                <OutputText cols='12' name='lHit2B' main='2B' value={valPerformance.lHit2B} />
-                <OutputText cols='12' name='lOPS' main='OPS' value={valPerformance.lOPS} />
-                <OutputText cols='12' name='lHit3B' main='3B' value={valPerformance.lHit3B} />
-                <OutputText cols='12' name='lRUN' main='R' value={valPerformance.lRUN} />
-                <OutputText cols='12' name='lHitHR' main='HR' value={valPerformance.lHitHR} />
-                <OutputText cols='12' name='lHits' main='H' value={valPerformance.lHits} />
-                <OutputText cols='12' name='lBK' main='K' value={valPerformance.lBK} />
+                <OutputText2 cols='12' name1='lAVG' main1='AVG' value1={valPerformance.lAVG} name2='lHit2B' main2='2B' value2={valPerformance.lHit2B} />
+                <OutputText2 cols='12' name1='lOPS' main1='OPS' value1={valPerformance.lOPS} name2='lHit3B' main2='3B' value2={valPerformance.lHit3B} />
+                <OutputText2 cols='12' name1='lRUN' main1='R' value1={valPerformance.lRUN} name2='lHitHR' main2='HR' value2={valPerformance.lHitHR} />
+                <OutputText2 cols='12' name1='lHits' main1='H' value1={valPerformance.lHits} name2='lBK' main2='K' value2={valPerformance.lBK} />
+
                 <OutputText cols='12' name='lBBB' main='BB' value={valPerformance.lBBB} />
               </div>
             </Col>
