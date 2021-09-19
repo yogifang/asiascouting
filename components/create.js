@@ -20,6 +20,7 @@ const initialFValues = {
 const optionsSportItem = [
   { value: "baseball", label: "棒球" },
   { value: "shooting", label: "射擊" },
+  { value: "athletics", label: "田徑" },
 ];
 
 const InputEmail = {

@@ -38,7 +38,21 @@ const NavSwap = () => {
         className={member === '' ? 'disabled' : 'disabled:false'}
       >
         <span>
-          射擊成績 <br></br>Shooting
+          射擊成績 <br></br>Shooting Performance
+        </span>
+      </Button>
+    );
+  }
+  if (sportItem === 'athletics') {
+    return (
+      <Button
+        size='sm'
+        variant='light'
+        onClick={(e) => handleButtonClick(e, '/athletics')}
+        className={member === '' ? 'disabled' : 'disabled:false'}
+      >
+        <span>
+          田徑成績<br></br>Athletics Performance
         </span>
       </Button>
     );

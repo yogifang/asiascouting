@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }) {
   const [member, setMember] = useState("");
   const [sportItem, setSportItem] = useState("baseball");
 
+
   return (
     <>
       <Context.Provider value={{ member, setMember, sportItem, setSportItem }}>
