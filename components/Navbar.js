@@ -6,7 +6,7 @@ import NavSwap from "./NavSwap";
 import { useRouter } from "next/router";
 
 const AppNavbar = () => {
-  const { member, setMember, sportItem, setSportItem } = useContext(Context);
+  const { member, setMember, sportItem, setSportItem , stage , setStage } = useContext(Context);
   const router = useRouter();
 
   const handleButtonClick = (event, path) => {
@@ -44,7 +44,7 @@ const AppNavbar = () => {
           size="sm"
           variant="light"
           onClick={(e) => handleButtonClick(e, "/contacts")}
-          className={member === "" ? "disabled" : "disabled:false"}
+          className={member === ""  ? "disabled" : "disabled:false"}
         >
           <span>
             聯繫資料 <br></br>Contact
