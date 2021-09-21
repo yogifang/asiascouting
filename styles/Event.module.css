@@ -2,7 +2,8 @@
   display: block;
   padding: 0;
   text-align: left;
-  font-size: 16px;
+  font-size: 12px;
+  height: 15px;
   margin-bottom: 0;
   width: 100%;
 }

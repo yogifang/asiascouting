@@ -9,6 +9,7 @@ const optionsSeasons = [
   { value: 'Indoor', label: '室內' },
   { value: 'Outdoor', label: '室外' },
 ];
+
 const optionsFieldItems = [
   { value: 'High Jump', label: '跳高', unit: 'cm' },
   { value: 'Pole Vault', label: '撐竿跳高', unit: 'cm' },
@@ -20,26 +21,34 @@ const optionsFieldItems = [
   { value: 'Javelin', label: '標槍', unit: 'cm' },
 ];
 
-const optionsTrackItemsMale = [
+const optionsTrackItems = [
   { value: '100M', label: '100M賽跑', unit: 'second' },
   { value: '200M', label: '200M賽跑', unit: 'second' },
   { value: '400M', label: '400M賽跑', unit: 'second' },
   { value: '800M', label: '800M賽跑', unit: 'second' },
   { value: '1500M', label: '1500M賽跑', unit: 'second' },
+  { value: '100M Hurdles(female)', label: '100M跨欄', unit: 'second' },
   { value: '110M Hurdles', label: '110M跨欄', unit: 'second' },
   { value: '400M Hurdles', label: '400M跨欄', unit: 'second' },
   { value: '3000M Steeplechase ', label: '3000M障礙賽', unit: 'second' },
-];
-const optionsTrackItemsFemale = [
-  { value: '100M', label: '100M賽跑', unit: 'second' },
-  { value: '200M', label: '200M賽跑', unit: 'second' },
-  { value: '400M', label: '400M賽跑', unit: 'second' },
-  { value: '800M', label: '800M賽跑', unit: 'second' },
-  { value: '1500M', label: '1500M賽跑', unit: 'second' },
-  { value: '100M Hurdles', label: '100M跨欄', unit: 'second' },
-  { value: '400M Hurdles', label: '400M跨欄', unit: 'second' },
-  { value: '3000M Steeplechase ', label: '3000M障礙賽', unit: 'second' },
-];
+]
+
+const optionsAllRoundItems = [
+  { value: 'Heptathlon（Female', label: '女子七項', unit: 'points' },
+  { value: 'Decathlon （Male', label: '男子十項', unit: 'points' },
+]
+
+const optionMarathonItems = [
+  { value: 'Half Marathon', label: '半馬拉松', unit: 'second' },
+  { value: 'Marathon', label: '馬拉松', unit: 'second' },
+  { value: 'Ultramarathon', label: '超級馬拉松', unit: 'second' },
+]
+
+
+const optionsWalkItems = [
+  { value: '20KM walk', label: '20公里競走', unit: 'second' },
+  { value: '50KM walk', label: '50公里競走', unit: 'second' },
+]
 
 const EventInput = (props) => {
   //  const [selItems, setSelItems] = useState(optionsFieldItems);
@@ -47,6 +56,22 @@ const EventInput = (props) => {
   // console.log(props.values[props.configText.name]);
   // console.log(props.type);
   const athleticsType = props.type.value;
+  const scoreType = props.configText.scoreType;
+  const [selItem, setSelItem] = useState(props.configText.item);
+  const [selSeason, setSelSeason] = useState(props.configText.season);
+  const [score1, setScore1] = useState(props.configText.score1)
+  const [score2, setScore2] = useState(props.configText.score2)
+  const [date1, setDate1] = useState(props.configText.date1)
+  const [date2, setDate2] = useState(props.configText.date2)
+
+  const customStyles = {
+    control: base => ({
+      ...base,
+      height: 32,
+      minHeight: 32
+    })
+  };
+
   let tempEvent;
   let selItems = [];
   console.log(athleticsType);
@@ -61,10 +86,13 @@ const EventInput = (props) => {
         selItems = optionsTrackItemsMale;
         break;
       case 'All-round':
+        selItems = optionsAllRoundItems;
         break;
       case 'Marathon':
-
+        selItems = optionMarathonItems;
+        break;
       case 'Walk':
+        selItems = optionsWalkItems;
         break;
       default:
         break;
@@ -72,6 +100,15 @@ const EventInput = (props) => {
   }
 
   optionsItems();
+
+
+  const handleSelectItem = (level) => {
+    console.log(level);
+  }
+  const handleSelectSeason = (level) => {
+    console.log(level);
+    setSelSeason(level);
+  }
 
   const handleLocalChange = (level) => {
     // console.log('----------Select');
@@ -82,22 +119,39 @@ const EventInput = (props) => {
   return (
     <>
       <Row>
+
         <Col lg='2'>
+
           <Select
-            placeholder='Select Level'
+            placeholder='選取比賽項目'
             className={styles.eventselect}
             name={props.configText.name}
             autosize={true}
-            value={props.values}
-            onChange={handleLocalChange}
+            value={selItem}
+            onChange={handleSelectItem}
             id={props.configText.name}
             options={selItems}
+            styles={customStyles}
           />
-          <Form.Label className={styles.colRightSub}>{props.error[props.configText.name]}</Form.Label>{' '}
         </Col>
-      </Row>
-      <Row>
-          <Col lg='1'> </Col>
+
+        <Col lg='2' >
+          <Select
+            placeholder='室內/戶外'
+            className={styles.eventselect}
+            name={props.configText.name}
+            autosize={true}
+            value={selSeason}
+            onChange={handleSelectSeason}
+            id={props.configText.name}
+            options={optionsSeasons}
+            styles={customStyles}
+          />
+
+
+        </Col>
+
+
         <Col lg='1'>
           <Form.Control size='sm' type='text' placeholder='Min' />
         </Col>

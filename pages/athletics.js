@@ -33,6 +33,8 @@ const optionsAthleticsTypes = [
 
 const bestEvent1 = {
     name: 'bestevent1',
+    season: 'indoor',
+
 
 }
 
