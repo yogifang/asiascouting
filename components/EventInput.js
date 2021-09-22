@@ -118,8 +118,18 @@ const EventInput = (props) => {
   const customStyles = {
     control: (base) => ({
       ...base,
+      width: '100%' ,
+      
       height: 32,
       minHeight: 32,
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+     
+    }),
+    container: (base) => ({
+      ...base,
+      marginleft:'0',
     }),
     groupHeading: (base) => ({
       ...base,
@@ -130,6 +140,7 @@ const EventInput = (props) => {
     singleValue: (base) =>({
       ...base ,
       height: 20,
+      paddingleft: 0 ,
       minHeight: 20,
     }) ,
     option: (base) =>({
