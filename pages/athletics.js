@@ -32,9 +32,21 @@ const optionsAthleticsTypes = [
 const initBestEvent = {
   item: '',
   season: '',
-  score1: {},
+  score1: {
+    min:0 ,
+    sec: 0 ,
+    hud: 0 ,
+    points:0 ,
+    cm: 0 ,
+  },
   date1: Date.now(),
-  score2: {},
+  score2: {
+    min:0 ,
+    sec: 0 ,
+    hud: 0 ,
+    points:0 ,
+    cm: 0 ,
+  },
   date2: Date.now(),
 };
 
