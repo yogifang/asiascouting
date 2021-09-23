@@ -32,6 +32,7 @@ const SelectInput = (props) => {
           value={props.values}
           onChange={handleLocalChange}
           id={props.configText.name}
+          instanceId={props.configText.name}
           options={props.configText.options}
         />
         <Form.Label className={styles.colRightSub}>

@@ -103,7 +103,7 @@ const optionsWalkItems = [
 
 const EventInput = (props) => {
   //  const [selItems, setSelItems] = useState(optionsFieldItems);
-  console.log(props.values);
+  // console.log(props.values);
   // console.log(props.values[props.configText.name]);
   // console.log(props.type);
   const [values, setValues] = useState(props.values);
@@ -112,9 +112,9 @@ const EventInput = (props) => {
   const [unit, setUnit] = useState('second');
   const [date1, setDate1] = useState(values.date1);
   const [date2, setDate2] = useState(values.date2);
-  const [tempValue , setTempValue] = useState(props.values) ;
-  let calcValue = tempValue ;
-  console.log(tempValue);
+  const [tempValue, setTempValue] = useState(props.values);
+  let calcValue = tempValue;
+  // console.log(tempValue);
 
   const customStyles = {
     control: (base) => ({
@@ -151,48 +151,62 @@ const EventInput = (props) => {
     }),
   };
 
-  let tempEvent;
-  let selItems = [];
 
   const handleSelectItem = (level) => {
-    console.log(level);
+    // console.log(level);
     setUnit(level.unit);
   };
   const handleSelectSeason = (level) => {
-    console.log(level);
+    // console.log(level);
     setSelSeason(level);
+    console.log(selSeason);
   };
-  const handleDateChange = (date , event) => {
-    console.log(event);
-    console.log(date);
+  const handleDate1Change = (date) => {
+    setDate1(date)
+
+  };
+  const handleDate2Change = (date) => {
+    setDate2(date)
   };
   const handleNumberChange = (event) => {
-    const num = parseInt(event.target.value) ;
-  //  console.log(event.target);
+    const num = parseInt(event.target.value);
+    //  console.log(event.target);
     switch (event.target.name) {
-      case 'Min1' :
-          calcValue.score1.min = num ; 
-        break ;
-        case 'Min2' :
-          calcValue.score2.min = num ; 
-        break ;
-        case 'Sec1' :
-          calcValue.score1.sec = num ; 
-        break ;
-        case 'Sec2' :
-          calcValue.score2.sec = num ; 
-        break ;
-        case 'Hud1' :
-          calcValue.score1.hud = num ; 
-        break ;
-        case 'Hud2' :
-          calcValue.score2.hud = num ; 
-        break ;
-        default:
-          break ;
+      case 'Min1':
+        calcValue.score1.min = num;
+        break;
+      case 'Min2':
+        calcValue.score2.min = num;
+        break;
+      case 'Sec1':
+        calcValue.score1.sec = num;
+        break;
+      case 'Sec2':
+        calcValue.score2.sec = num;
+        break;
+      case 'Hud1':
+        calcValue.score1.hud = num;
+        break;
+      case 'Hud2':
+        calcValue.score2.hud = num;
+        break;
+      case 'CM1':
+        calcValue.score1.cm = num;
+        break;
+      case 'Points1':
+        calcValue.score1.points = num;
+        break;
+      case 'CM2':
+        calcValue.score2.cm = num;
+        break;
+      case 'Points2':
+        calcValue.score2.points = num;
+        break;
+      default:
+        break;
     }
-    setTempValue(calcValue) ;
-    console.log(tempValue.score1.min) ;
+    setTempValue(calcValue);
+    // console.log(tempValue.score1.min);
 
   };
 
@@ -206,29 +220,31 @@ const EventInput = (props) => {
     <>
       <Row>
         <Col lg='4'>
-          <InputGroup className='mb-3'>
+          <InputGroup className='mb-3' >
             <Col lg='6'>
               <Select
+                id={props.name + 's1'}
+                instanceId={props.name + 's1'}
                 placeholder='選取比賽項目'
                 className={styles.eventselect}
                 name={props.name + 's1'}
                 autosize={true}
-                value={selItem}
+                value={selItem.label}
                 onChange={handleSelectItem}
-                id={props.name}
                 options={optionsAllItems}
                 styles={customStyles}
               />
             </Col>
             <Col lg='6'>
               <Select
+                id={props.name + 'season'}
+                instanceId={props.name + 'season'}
                 placeholder='室內/戶外'
                 className={styles.eventselect}
                 name={props.name + 'season'}
                 autosize={true}
                 value={selSeason}
                 onChange={handleSelectSeason}
-                id={props.name}
                 options={optionsSeasons}
                 styles={customStyles}
               />
@@ -247,25 +263,25 @@ const EventInput = (props) => {
             ) : null}
             {unit === 'cm' ? (
               <>
-                <Form.Control size='sm' type='number' placeholder='cm' />
+                <Form.Control name='CM1' size='sm' type='number' placeholder='cm' defaultValue={tempValue.score1.cm} onChange={handleNumberChange} />
               </>
             ) : null}
             {unit === 'points' ? (
               <>
-                <Form.Control size='sm' type='number' placeholder='points' />
+                <Form.Control name='Points1' size='sm' type='number' placeholder='points' defaultValue={tempValue.score1.points} onChange={handleNumberChange} />
               </>
             ) : null}
             <span>
               <DatePicker
-               id='date1'
-               className={styles.datepicker}
-               onChange={(date , event)=>handleDateChange(date, event)}
-               value={date2}
-               scrollableYearDropdown
-               showYearDropdown 
-               name={props.name+'date1'}   
-               selected={props.values.date1}    
-               dateFormatCalendar='yy-mm-dd'
+                id={props.name + 'date1'}
+                className={styles.datepicker}
+                onChange={(date) => handleDate1Change(date)}
+                value={date2}
+                scrollableYearDropdown
+                showYearDropdown
+                name={props.name + 'date1'}
+                selected={date1}
+                dateFormatCalendar='MMMM'
               />
             </span>
           </InputGroup>
@@ -275,32 +291,32 @@ const EventInput = (props) => {
           <InputGroup className='mb-3'>
             {unit === 'second' ? (
               <>
-               <Form.Control name='Min1' size='sm' type='number' placeholder='Min' defaultValue={tempValue.score2.min} onChange={handleNumberChange} />
+                <Form.Control name='Min1' size='sm' type='number' placeholder='Min' defaultValue={tempValue.score2.min} onChange={handleNumberChange} />
                 <Form.Control name='Sec1' size='sm' type='number' placeholder='Sec' defaultValue={tempValue.score2.sec} onChange={handleNumberChange} />
                 <Form.Control name='Hud1' size='sm' type='number' placeholder='Hun' defaultValue={tempValue.score2.hud} onChange={handleNumberChange} />
               </>
             ) : null}
             {unit === 'cm' ? (
               <>
-                <Form.Control size='sm' type='number' placeholder='cm' />
+                <Form.Control name='CM2' size='sm' type='number' placeholder='cm' defaultValue={tempValue.score2.cm} onChange={handleNumberChange} />
               </>
             ) : null}
             {unit === 'points' ? (
               <>
-                <Form.Control size='sm' type='number' placeholder='points' />
+                <Form.Control name='Points2' size='sm' type='number' placeholder='points' defaultValue={tempValue.score2.points} onChange={handleNumberChange} />
               </>
             ) : null}
             <span>
               <DatePicker
-                id='date2'
+                id={props.name + 'date2'}
                 className={styles.datepicker}
-                onChange={(date , event)=>handleDateChange(date, event)}
+                onChange={(date) => handleDate2Change(date)}
                 value={date2}
                 scrollableYearDropdown
-                showYearDropdown 
-                name={props.name+'date2'}   
-                selected={props.values.date2}    
-                dateFormatCalendar='yy-mm-dd'
+                showYearDropdown
+                name={props.name + 'date2'}
+                selected={date2}
+                dateFormatCalendar='MMMM'
               />
             </span>
           </InputGroup>

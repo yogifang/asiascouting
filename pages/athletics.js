@@ -33,105 +33,24 @@ const initBestEvent = {
   item: '',
   season: '',
   score1: {
-    min:0 ,
-    sec: 0 ,
-    hud: 0 ,
-    points:0 ,
-    cm: 0 ,
+    min: 0,
+    sec: 0,
+    hud: 0,
+    points: 0,
+    cm: 0,
   },
   date1: Date.now(),
   score2: {
-    min:0 ,
-    sec: 0 ,
-    hud: 0 ,
-    points:0 ,
-    cm: 0 ,
+    min: 0,
+    sec: 0,
+    hud: 0,
+    points: 0,
+    cm: 0,
   },
   date2: Date.now(),
 };
 
-const LatestGameName = {
-  type: 'text',
-  main: '最近一次比賽名稱',
-  sub: 'Latest Competition Name',
-  name: 'latestGameName',
-};
 
-const LastestScore = {
-  type: 'number',
-  main: '最近一次比賽成績',
-  sub: 'Latest Competition Results',
-  name: 'lastestScore',
-};
-const LatestGameDate = {
-  format: 'MMMM',
-  main: '比賽日期',
-  sub: 'Date',
-  name: 'latestGameDate',
-};
-const Best10M60R = {
-  type: 'number',
-  main: '10米生涯最佳成績(60發)',
-  sub: '10M Air Rifle Record(60 shots)',
-  name: 'best10M60R',
-};
-const athleticsType = {
-  options: optionsAthleticsTypes,
-  main: '田徑類別',
-  sub: 'Track & Field Type',
-  name: 'athleticsType',
-};
-const Best10MDate = {
-  format: 'MMMM',
-  main: '比賽日期',
-  sub: 'Date',
-  name: 'best10MDate',
-};
-const Best50M3x40 = {
-  type: 'number',
-  main: '50米生涯最佳成績(3x40)',
-  sub: '50M Rifle Record (3x40)',
-  name: 'best50M3x40',
-};
-const Best50M3x40Level = {
-  options: optionsGameLevel,
-  main: '在哪一層級之賽事達到該成績',
-  sub: 'Latest Competition Name',
-  name: 'best50M3x40Level',
-};
-
-const RankNational = {
-  type: 'number',
-  main: '國內排名',
-  sub: 'National Rank',
-  name: 'rankNational',
-};
-const RankWorld = {
-  type: 'number',
-  main: '世界排名',
-  sub: 'World Rank',
-  name: 'rankWorld',
-};
-const LinkISSF = {
-  type: 'text',
-  main: 'ISSF 官網選手連結',
-  sub: 'ISSF Profile Link',
-  name: 'linkISSF',
-};
-const LinkVideo = {
-  type: 'text',
-  main: '比賽或訓練影片',
-  sub: 'Showcasing Vidoes',
-  name: 'linkVideo',
-};
-
-const eventData = {
-  season: 'Outdoor',
-  gameType: '',
-  bestScore1: 0,
-  bestDate1: new Date(),
-  bestLevel1: '',
-};
 
 const initialFValues = {
   _id: '',
@@ -147,12 +66,12 @@ const initialFValues = {
 
 const Shooting = () => {
   const { member, setMember } = useContext(Context);
-  const [bestevent1 , setBestevent1] = useState(initBestEvent)
-  const [bestevent2 , setBestevent2] = useState(initBestEvent)
-  const [bestevent3 , setBestevent3] = useState(initBestEvent)
-  const [bestevent4 , setBestevent4] = useState(initBestEvent)
-  const [bestevent5 , setBestevent5] = useState(initBestEvent)
-  const [bestevent6 , setBestevent6] = useState(initBestEvent)
+  const [bestevent1, setBestevent1] = useState(initBestEvent)
+  const [bestevent2, setBestevent2] = useState(initBestEvent)
+  const [bestevent3, setBestevent3] = useState(initBestEvent)
+  const [bestevent4, setBestevent4] = useState(initBestEvent)
+  const [bestevent5, setBestevent5] = useState(initBestEvent)
+  const [bestevent6, setBestevent6] = useState(initBestEvent)
 
   const findIndexByValue = (options, label) => {
     console.log(label);
@@ -194,7 +113,7 @@ const Shooting = () => {
     //values.member = recMember.email ;
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleEventChange = (date, name) => {};
+  const handleEventChange = (date, name) => { };
 
   const handleSelectChange = (level, name) => {
     //  console.log(name);
@@ -251,23 +170,9 @@ const Shooting = () => {
           </Row>
           <br />
           <Row>
-            <EventInput name='event1' handleFunc={handleEventChange} values={bestevent1}  />
+            <EventInput name='event1' handleFunc={handleEventChange} values={bestevent1} />
           </Row>
-          <Row>
-            <EventInput name='event2' handleFunc={handleEventChange} values={bestevent2}  />
-          </Row>
-          <Row>
-            <EventInput name='event3' handleFunc={handleEventChange} values={bestevent3}  />
-          </Row>
-          <Row>
-            <EventInput name='event4' handleFunc={handleEventChange} values={bestevent4}  />
-          </Row>
-          <Row>
-            <EventInput name='event5' handleFunc={handleEventChange} values={bestevent5}  />
-          </Row>
-          <Row>
-            <EventInput name='event6' handleFunc={handleEventChange} values={bestevent6}  />
-          </Row>
+
           <Row>
             <br></br>
             <Button
