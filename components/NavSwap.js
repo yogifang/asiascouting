@@ -24,7 +24,7 @@ const NavSwap = () => {
         className={member === '' ? 'disabled' : 'disabled:false'}
       >
         <span>
-          成績及運動表現 <br></br>Physical Performance
+          棒球運動表現 <br></br> Baseball Performance
         </span>
       </Button>
     );
