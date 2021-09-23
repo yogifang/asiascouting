@@ -1,4 +1,4 @@
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, InputGroup } from 'react-bootstrap';
 import styles from '../styles/Event.module.css';
 import Select from 'react-select';
 import { useState } from 'react';
@@ -106,82 +106,52 @@ const EventInput = (props) => {
   //  console.log(props.values);
   // console.log(props.values[props.configText.name]);
   // console.log(props.type);
-  const athleticsType = props.type.value;
-  const scoreType = props.configText.scoreType;
-  const [selItem, setSelItem] = useState(props.configText.item);
-  const [selSeason, setSelSeason] = useState(props.configText.season);
-  const [score1, setScore1] = useState(props.configText.score1);
-  const [score2, setScore2] = useState(props.configText.score2);
-  const [date1, setDate1] = useState(props.configText.date1);
-  const [date2, setDate2] = useState(props.configText.date2);
+  const [selItem , setSelItem] = useState('') ;
+  const [selSeason , setSelSeason] = useState('') ;
+  const [unit, setUnit] = useState('second');
 
   const customStyles = {
     control: (base) => ({
       ...base,
-      width: '100%' ,
-      
+      width: '100%',
+
       height: 32,
       minHeight: 32,
     }),
     dropdownIndicator: (base) => ({
       ...base,
-     
     }),
     container: (base) => ({
       ...base,
-      marginleft:'0',
+      marginleft: '0',
     }),
     groupHeading: (base) => ({
       ...base,
-      fontStyle : 'italic' ,
-      color : 'blue' ,
+      fontStyle: 'italic',
+      color: 'blue',
       padding: 4,
-    }) ,
-    singleValue: (base) =>({
-      ...base ,
+    }),
+    singleValue: (base) => ({
+      ...base,
       height: 20,
-      paddingleft: 0 ,
+      paddingleft: 0,
       minHeight: 20,
-    }) ,
-    option: (base) =>({
-      ...base ,
+    }),
+    option: (base) => ({
+      ...base,
       height: 20,
       minHeight: 20,
       padding: 2,
-    }) ,
+    }),
   };
 
   let tempEvent;
   let selItems = [];
-  console.log(athleticsType);
-
-  function optionsItems() {
-    console.log(athleticsType);
-    switch (athleticsType) {
-      case 'Field':
-        selItems = optionsFieldItems;
-        break;
-      case 'Track':
-        selItems = optionsTrackItemsMale;
-        break;
-      case 'All-round':
-        selItems = optionsAllRoundItems;
-        break;
-      case 'Marathon':
-        selItems = optionMarathonItems;
-        break;
-      case 'Walk':
-        selItems = optionsWalkItems;
-        break;
-      default:
-        break;
-    }
-  }
-
-  optionsItems();
+  
 
   const handleSelectItem = (level) => {
     console.log(level);
+    setUnit(level.unit);
   };
   const handleSelectSeason = (level) => {
     console.log(level);
@@ -201,11 +171,11 @@ const EventInput = (props) => {
           <Select
             placeholder='選取比賽項目'
             className={styles.eventselect}
-            name={props.configText.name}
+            name={props.name}
             autosize={true}
             value={selItem}
             onChange={handleSelectItem}
-            id={props.configText.name}
+            id={props.name}
             options={optionsAllItems}
             styles={customStyles}
           />
@@ -215,50 +185,115 @@ const EventInput = (props) => {
           <Select
             placeholder='室內/戶外'
             className={styles.eventselect}
-            name={props.configText.name}
+            name={props.name}
             autosize={true}
             value={selSeason}
             onChange={handleSelectSeason}
-            id={props.configText.name}
+            id={props.name}
             options={optionsSeasons}
             styles={customStyles}
           />
         </Col>
+        {unit === 'second' ? (
+          <Col lg='4'>
+            <InputGroup className='mb-3'>
+              <Form.Control size='sm' type='number' placeholder='Min' />
+              <Form.Control size='sm' type='number' placeholder='Sec' />
+              <Form.Control size='sm' type='number' placeholder='Hun' />
+              <span>
+                <DatePicker
+                  className={styles.datepicker}
+                  onChange={handleLocalChange}
+                  scrollableYearDropdown
+                  showYearDropdown
+                />
+              </span>
+            </InputGroup>
+          </Col>
+        ) : null}
+        {unit === 'cm' ? (
+          <Col lg='4'>
+            <InputGroup className='mb-3'>
+              <Form.Control size='sm' type='number' placeholder='cm' />
 
-        <Col lg='1'>
-          <Form.Control size='sm' type='text' placeholder='Min' />
-        </Col>
-        <Col lg='1'>
-          <Form.Control size='sm' type='text' placeholder='Sec' />
-        </Col>
-        <Col lg='1'>
-          <Form.Control size='sm' type='text' placeholder='Hun' />
-        </Col>
-        <Col lg='1'>
-          <DatePicker
-            className={styles.datepicker}
-            onChange={handleLocalChange}
-            scrollableYearDropdown
-            showYearDropdown
-          />
-        </Col>
-        <Col lg='1'>
-          <Form.Control size='sm' type='text' placeholder='Min' />
-        </Col>
-        <Col lg='1'>
-          <Form.Control size='sm' type='text' placeholder='Sec' />
-        </Col>
-        <Col lg='1'>
-          <Form.Control size='sm' type='text' placeholder='Hun' />
-        </Col>
-        <Col lg='1'>
-          <DatePicker
-            className={styles.datepicker}
-            onChange={handleLocalChange}
-            scrollableYearDropdown
-            showYearDropdown
-          />
-        </Col>
+              <span>
+                <DatePicker
+                  className={styles.datepicker}
+                  onChange={handleLocalChange}
+                  scrollableYearDropdown
+                  showYearDropdown
+                />
+              </span>
+            </InputGroup>
+          </Col>
+        ) : null}
+        {unit === 'points' ? (
+          <Col lg='4'>
+            <InputGroup className='mb-3'>
+              <Form.Control size='sm' type='number' placeholder='points' />
+
+              <span>
+                <DatePicker
+                  className={styles.datepicker}
+                  onChange={handleLocalChange}
+                  scrollableYearDropdown
+                  showYearDropdown
+                />
+              </span>
+            </InputGroup>
+          </Col>
+        ) : null}
+       
+       {unit === 'second' ? (
+          <Col lg='4'>
+            <InputGroup className='mb-3'>
+              <Form.Control size='sm' type='number' placeholder='Min' />
+              <Form.Control size='sm' type='number' placeholder='Sec' />
+              <Form.Control size='sm' type='number' placeholder='Hun' />
+              <span>
+                <DatePicker
+                  className={styles.datepicker}
+                  onChange={handleLocalChange}
+                  scrollableYearDropdown
+                  showYearDropdown
+                />
+              </span>
+            </InputGroup>
+          </Col>
+        ) : null}
+        {unit === 'cm' ? (
+          <Col lg='4'>
+            <InputGroup className='mb-3'>
+              <Form.Control size='sm' type='number' placeholder='cm' />
+
+              <span>
+                <DatePicker
+                  className={styles.datepicker}
+                  onChange={handleLocalChange}
+                  scrollableYearDropdown
+                  showYearDropdown
+                  placeholder='Pick a Date'
+                />
+              </span>
+            </InputGroup>
+          </Col>
+        ) : null}
+        {unit === 'points' ? (
+          <Col lg='4'>
+            <InputGroup className='mb-3'>
+              <Form.Control size='sm' type='number' placeholder='points' />
+
+              <span>
+                <DatePicker
+                  className={styles.datepicker}
+                  onChange={handleLocalChange}
+                  scrollableYearDropdown
+                  showYearDropdown
+                />
+              </span>
+            </InputGroup>
+          </Col>
+        ) : null}
       </Row>
     </>
   );
