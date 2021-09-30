@@ -18,7 +18,7 @@ export default async (req, res) => {
     case "POST":
       req.body._id = null;
       try {
-        const members = await ShootingPerformance.create(req.body);
+        const shootingPerformance = await ShootingPerformance.create(req.body);
 
         res.status(201).json({ success: true, data: shootingPerformance });
       } catch (error) {

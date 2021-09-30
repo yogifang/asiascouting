@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Navbar from '../components/Navbar';
 import { useForm } from '../components/useForm';
-import { Button, Row, Container, ButtonGroup } from 'react-bootstrap';
+import { Button, Row, Col, Container, ButtonGroup } from 'react-bootstrap';
 import { Context } from '../components/stores';
 import { useState, useEffect, useReducer, useContext } from 'react';
 
@@ -39,7 +39,7 @@ const initBestEvent = {
     points: 0,
     cm: 0,
   },
-  date1: Date.now(),
+  date1: Date(Date.now()),
   score2: {
     min: 0,
     sec: 0,
@@ -47,7 +47,7 @@ const initBestEvent = {
     points: 0,
     cm: 0,
   },
-  date2: Date.now(),
+  date2: Date(Date.now()),
 };
 
 
@@ -66,12 +66,14 @@ const initialFValues = {
 
 const Shooting = () => {
   const { member, setMember } = useContext(Context);
-  const [bestevent1, setBestevent1] = useState(initBestEvent)
-  const [bestevent2, setBestevent2] = useState(initBestEvent)
-  const [bestevent3, setBestevent3] = useState(initBestEvent)
-  const [bestevent4, setBestevent4] = useState(initBestEvent)
-  const [bestevent5, setBestevent5] = useState(initBestEvent)
-  const [bestevent6, setBestevent6] = useState(initBestEvent)
+  const [_id, set_ID] = useState('')
+  let bestevent1 = initBestEvent;
+  let bestevent2 = initBestEvent;
+  let bestevent3 = initBestEvent;
+  let bestevent4 = initBestEvent;
+  let bestevent5 = initBestEvent;
+  let bestevent6 = initBestEvent;
+  let values = {};
 
   const findIndexByValue = (options, label) => {
     console.log(label);
@@ -80,40 +82,44 @@ const Shooting = () => {
     //console.log(options[4].label);
   };
 
-  const validate = (fieldValues = values) => {
-    let temp = { ...errors };
-    const keyname = Object.getOwnPropertyNames(fieldValues);
-
-    switch (keyname[0]) {
-      case 'lastestScore':
-      case 'best10M60R':
-      case 'best50M3x40':
-      case 'best50M3x20':
-      case 'rankNational':
-      case 'rankWorld':
-        temp[keyname] = fieldValues[keyname] < 0 ? (temp[keyname] = '不得小於0') : '';
-        break;
-      default:
-        break;
-    }
-    setErrors({
-      ...temp,
-    });
-
-    if (fieldValues === values) return Object.values(temp).every((x) => x === '');
-  };
-
-  const { values, setValues, errors, setErrors, handleInputChange, resetForm } = useForm(
-    initialFValues,
-    true,
-    validate
-  );
 
   useEffect(() => {
     //values.member = recMember.email ;
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleEventChange = (date, name) => { };
+  const handleEventChange = (name, data) => {
+    //  console.log(values)
+    return;
+    switch (name) {
+      case 'event1':
+        //    setBestevent1(data);
+        bestevent1 = data;
+        break;
+      case 'event2':
+        //     setBestevent1(data);
+        bestevent2 = data;
+        break;
+      case 'event3':
+        //      setBestevent1(data);
+
+        bestevent3 = data;
+        break;
+      case 'event4':
+        //    setBestevent1(data);
+        bestevent4 = data;
+        break;
+      case 'event5':
+        //     setBestevent1(data);
+        bestevent5 = data;
+        break;
+      case 'event6':
+        //    setBestevent1(data);
+        bestevent6 = data;
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleSelectChange = (level, name) => {
     //  console.log(name);
@@ -130,8 +136,12 @@ const Shooting = () => {
   };
 
   const handleClick = async (e) => {
+
+    Object.assign(values, _id, member, bestevent1, bestevent2, bestevent3, bestevent4, bestevent5, bestevent6);
+    console.log(values);
+
     if (values._id === '') {
-      const url = process.env.HOST_URI + `api/shootingPerformance/`;
+      const url = process.env.HOST_URI + `api/athleticsPerformance/`;
       values.member = member;
 
       const result = await fetch(url, {
@@ -144,7 +154,7 @@ const Shooting = () => {
       const data = await result.json();
       alert('Data is Saved!!');
     } else {
-      const url = process.env.HOST_URI + `api/shootingPerformance/${member}`;
+      const url = process.env.HOST_URI + `api/athleticsPerformance/${member}`;
       values.member = member;
 
       const result = await fetch(url, {
@@ -169,6 +179,20 @@ const Shooting = () => {
             <p className={styles.textpurple}>田徑成績及運動表現</p>
           </Row>
           <br />
+          <Row>
+            <Col sm={2} >
+              <h6 className={styles.m0}>運動項目</h6>
+            </Col>
+            <Col sm={2} >
+              <h6 className={styles.m0}>運動場地</h6>
+            </Col>
+            <Col sm={4} >
+              <h6 className={styles.m0}>最佳成績《一》</h6>
+            </Col>
+            <Col sm={4} >
+              <h6 className={styles.m0}>最佳成績《二》</h6>
+            </Col>
+          </Row>
           <Row>
             <EventInput name='event1' handleFunc={handleEventChange} values={bestevent1} />
           </Row>

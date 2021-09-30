@@ -13,7 +13,33 @@
   padding: 0;
   text-align: left;
   font-size: 12px;
-  height: 35px;
+  height: 32px;
   margin-bottom: 0;
   width: 100px;
+}
+.colRightSub {
+  display: block;
+  margin-top: 0px;
+  padding: 0;
+  text-align: left;
+  font-size: 8px;
+}
+
+.colRightMain {
+  display: block;
+  padding: 0;
+  text-align: left;
+  font-size: 16px;
+  width: 22%;
+  margin-bottom: 0;
+  margin-right: 2px;
+}
+.colRightMain1 {
+  display: block;
+  padding: 0;
+  text-align: left;
+  font-size: 16px;
+  width: 66%;
+  margin-bottom: 0;
+  margin-right: 2px;
 }
