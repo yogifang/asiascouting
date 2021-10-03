@@ -30,7 +30,7 @@ const optionsAthleticsTypes = [
 ];
 
 const initBestEvent = {
-  item: '',
+  item: { value: '', label: '', unit: 'cm' },
   season: '',
   score1: {
     min: 0,
@@ -88,7 +88,9 @@ const Shooting = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleEventChange = (name, data) => {
-    //  console.log(values)
+
+    console.log(data)
+    console.log(name)
     return;
     switch (name) {
       case 'event1':
@@ -196,7 +198,21 @@ const Shooting = () => {
           <Row>
             <EventInput name='event1' handleFunc={handleEventChange} values={bestevent1} />
           </Row>
-
+          <Row>
+            <EventInput name='event2' handleFunc={handleEventChange} values={bestevent2} />
+          </Row>
+          <Row>
+            <EventInput name='event3' handleFunc={handleEventChange} values={bestevent3} />
+          </Row>
+          <Row>
+            <EventInput name='event4' handleFunc={handleEventChange} values={bestevent4} />
+          </Row>
+          <Row>
+            <EventInput name='event5' handleFunc={handleEventChange} values={bestevent5} />
+          </Row>
+          <Row>
+            <EventInput name='event6' handleFunc={handleEventChange} values={bestevent6} />
+          </Row>
           <Row>
             <br></br>
             <Button

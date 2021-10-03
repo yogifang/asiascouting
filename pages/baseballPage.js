@@ -106,6 +106,13 @@ const initialBaseballPerformance = {
   bFilled: false,
 };
 
+
+const feetHeight = (cm) => {
+  const feet = (cm / 30.48).toFixed(0);
+  const inches = ((cm - (feet * 30.48)) / 2.54).toFixed(0);
+  return feet.toString() + '"' + inches.toString() + "'"
+}
+
 const BaseballPage = () => {
   const { member, setMember } = useContext(Context);
   const [values, setValues] = useState(initialBaseinfos);
@@ -119,7 +126,7 @@ const BaseballPage = () => {
     const getBaseballInfo = async () => {
       try {
         const url = process.env.HOST_URI + `api/baseballInfo/${member}`;
-        // const res = await fetch(`https://dashboard-chi-three.vercel.app/api/baseballInfo/${member}`, {
+
         const res = await fetch(url, {
           method: 'GET',
           headers: {
@@ -302,7 +309,7 @@ const BaseballPage = () => {
               <OutputTextBig cols='12' name='ChineseName' main='' value={values.ChineseName} />
               <OutputTextBig cols='12' name='PassportName' main='' value={values.PassportName} />
               <OutputText cols='12' name='Gender' main='' value={values.Gender} />
-              <OutputContent cols="6" name="Hight" main="" value1={feetHeight(values.Height)} value2={(values.Weight/0.454).toFixed(1)} unit1='' unit2='lb' />
+              <OutputContent cols="6" name="Hight" main="" value1={feetHeight(values.Height)} value2={(values.Weight / 0.454).toFixed(1)} unit1='' unit2='lb' />
               <OutputText cols='12' name='email' main='' value={valContact.email} />
             </Col>
             <Col sm='3'>

@@ -257,10 +257,10 @@ const ShootingPage = () => {
 
   }
 
-  const feetHeight = ( cm) => {
-     const feet = (cm / 30.48).toFixed(0) ;
-     const inches = ((cm - (feet*30.48))/2.54).toFixed(0); 
-     return feet.toString() + '"' + inches.toString() + "'"
+  const feetHeight = (cm) => {
+    const feet = (cm / 30.48).toFixed(0);
+    const inches = ((cm - (feet * 30.48)) / 2.54).toFixed(0);
+    return feet.toString() + '"' + inches.toString() + "'"
   }
 
   return (
@@ -288,7 +288,7 @@ const ShootingPage = () => {
               <OutputTextBig cols="12" name="ChineseName" main="" value={values.ChineseName} />
               <OutputTextBig cols="12" name="PassportName" main="" value={values.PassportName} />
               <OutputText cols="12" name="Gender" main="" value={values.Gender} />
-              <OutputContent cols="6" name="Hight" main="" value1={feetHeight(values.Height)} value2={(values.Weight/0.454).toFixed(1)} unit1='' unit2='lb' />
+              <OutputContent cols="6" name="Hight" main="" value1={feetHeight(values.Height)} value2={(values.Weight / 0.454).toFixed(1)} unit1='' unit2='lb' />
               <OutputText cols="12" name="email" main="" value={valContact.email} />
             </Col>
 
@@ -298,7 +298,6 @@ const ShootingPage = () => {
               <button className="btn" onClick={onSubmitHandler}>submit</button>
             </Col>
           </Row>
-
           <Row className={styles.sheettable}>
             <Col className={styles.sidecolumn} sm='2' >
               <h5 className={styles.sidetitle}>information<br />Personal</h5>

@@ -227,12 +227,7 @@ const CreateSocial = () => {
                     </Col>
                 </Row>
                 <Row className={styles.sheettable}>
-                    <SelectInput
-                        configText={SelectSport}
-                        handleFunc={handleSelectChange}
-                        values={selItem}
-                        error={errors}
-                    />
+                    <SelectInput configText={SelectSport} handleFunc={handleSelectChange} values={selItem} error={errors} />
                 </Row>
                 <Row>
                     <p className={styles.m0}>

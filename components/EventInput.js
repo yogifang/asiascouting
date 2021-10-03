@@ -86,27 +86,18 @@ const initBestEvent = {
 
 
 const EventInput = (props) => {
-  const [selItems, setSelItems] = useState(optionsAllItems[0]);
+  const [selItems, setSelItems] = useState(props.values.item);
   const [selSeason, setSelSeason] = useState(optionsSeasons[0]);
-  const [best1, setBest1] = useState(initBestEvent)
-  const [best2, setBest2] = useState(initBestEvent)
-  const [best3, setBest3] = useState(initBestEvent)
-  const [best4, setBest4] = useState(initBestEvent)
-  const [best5, setBest5] = useState(initBestEvent)
-  const [best6, setBest6] = useState(initBestEvent)
-  // console.log(props.values);
-  // console.log(props.values[props.configText.name]);
-  // console.log(props.type);
+
+  const [date1, setDate1] = useState(null)
+  const [date2, setDate2] = useState(null)
+
   const values = props.values;
   let selItem = values.item;
-  let selSeason = values.season;
-  let unit = 'second';
-  let date1 = Date(Date.now());
-  let date2 = Date(Date.now());
-
+  const eventName = props.name;
 
   let calcValue = values;
-  // console.log(props);
+  // console.log(props.values);
 
   const customStyles = {
     control: (base) => ({
@@ -145,27 +136,34 @@ const EventInput = (props) => {
 
 
   const handleSelectItem = (level) => {
-    console.log(level);
-    //  setUnit(level.unit);
+    //  console.log(level);
+    setSelItems(level);
+    calcValue.item = level;
+    handleLocalChange();
   };
   const handleSelectSeason = (level) => {
-    console.log(level);
-    //   setSelSeason(level);
-    console.log(selSeason);
+    // console.log(level);
+    setSelSeason(level);
+    calcValue.season = level;
+    handleLocalChange();
   };
   const handleDate1Change = (date) => {
-    date1 = date;
-
+    setDate1(date);
+    calcValue.date1 = date1;
+    handleLocalChange();
   };
 
   const handleDate2Change = (date) => {
-    date2 = date;
+    setDate2(date);
+    calcValue.date2 = date2;
+    handleLocalChange();
   };
 
 
   const handleNumberChange = (event) => {
     const num = parseInt(event.target.value);
-    //  console.log(event.target);
+    console.log(event.target.name);
+
     switch (event.target.name) {
       case 'Min1':
         calcValue.score1.min = num;
@@ -228,15 +226,13 @@ const EventInput = (props) => {
       default:
         break;
     }
-    //  setTempValue(calcValue);
 
-    props.handleFunc(props.name, calcValue);
+    handleLocalChange();
   };
 
-  const handleLocalChange = (level) => {
-    // console.log('----------Select');
-    // console.log(level);
-    props.handleFunc(level, props.configText.name);
+  const handleLocalChange = () => {
+
+    props.handleFunc(eventName, calcValue);
   };
 
   return (
@@ -252,7 +248,7 @@ const EventInput = (props) => {
                 className={styles.eventselect}
                 name='item'
                 autosize={true}
-                value={selItem}
+                value={selItems}
                 onChange={handleSelectItem}
                 options={optionsAllItems}
                 styles={customStyles}
@@ -277,7 +273,7 @@ const EventInput = (props) => {
 
         <Col lg='4'>
           <InputGroup className='mb-3'>
-            {unit === 'second' ? (
+            {selItems.unit === 'second' ? (
               <>
                 <div className={styles.colRightMain}>
                   <Form.Control name='Min1' size='sm' type='number' placeholder='Min' defaultValue={calcValue.score1.min} onChange={handleNumberChange} />
@@ -294,7 +290,7 @@ const EventInput = (props) => {
                 </div>
               </>
             ) : null}
-            {unit === 'cm' ? (
+            {selItems.unit === 'cm' ? (
               <>
                 <div className={styles.colRightMain1}>
                   <Form.Control name='CM1' size='sm' type='number' placeholder='cm' defaultValue={calcValue.score1.cm} onChange={handleNumberChange} />
@@ -303,7 +299,7 @@ const EventInput = (props) => {
 
               </>
             ) : null}
-            {unit === 'points' ? (
+            {selItems.unit === 'points' ? (
               <>
                 <div className={styles.colRightMain1}>
                   <Form.Control name='Points1' size='sm' type='number' placeholder='points' defaultValue={calcValue.score1.points} onChange={handleNumberChange} />
@@ -334,7 +330,7 @@ const EventInput = (props) => {
 
         <Col lg='4'>
           <InputGroup className='mb-3'>
-            {unit === 'second' ? (
+            {selItems.unit === 'second' ? (
               <>
                 <div className={styles.colRightMain}>
                   <Form.Control name='Min2' size='sm' type='number' placeholder='Min' defaultValue={calcValue.score1.min} onChange={handleNumberChange} />
@@ -351,7 +347,7 @@ const EventInput = (props) => {
                 </div>
               </>
             ) : null}
-            {unit === 'cm' ? (
+            {selItems.unit === 'cm' ? (
               <>
                 <div className={styles.colRightMain1}>
                   <Form.Control name='CM2' size='sm' type='number' placeholder='cm' defaultValue={calcValue.score1.cm} onChange={handleNumberChange} />
@@ -360,7 +356,7 @@ const EventInput = (props) => {
 
               </>
             ) : null}
-            {unit === 'points' ? (
+            {selItems.unit === 'points' ? (
               <>
                 <div className={styles.colRightMain1}>
                   <Form.Control name='Points2' size='sm' type='number' placeholder='points' defaultValue={calcValue.score1.points} onChange={handleNumberChange} />

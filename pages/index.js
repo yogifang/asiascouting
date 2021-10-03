@@ -52,7 +52,7 @@ export default function Home() {
       setLogin(false);
       setSportItem(record.data.sportItem);
       router.push("/basicinfo");
-      
+
     } catch (err) {
       alert("讀取錯誤！請檢查連線！");
       console.log(err);
@@ -63,10 +63,11 @@ export default function Home() {
 
 
   const responseGoogle = (response) => {
-    console.log(response);
-    // console.log(response)  console.log(response.Ws.Ht);
+    // console.log(response.profileObj);
+
+    //console.log(response.profileObj.email);
     setLogin(true);
-    checkExistMember(response.Ws.Ht);
+    checkExistMember(response.profileObj.email);
   }
 
   const responseGoogleFailure = () => {
@@ -93,20 +94,10 @@ export default function Home() {
       {!login ? (
         <Row>
           <Col>
-            <Button
-              justification='right'
-              variant='secondary'
-              className={styles.btnAppCreate}
-              onClick={handleCreate}
-            ></Button>{' '}
+            <Button justification='right' variant='secondary' className={styles.btnAppCreate} onClick={handleCreate}></Button>
           </Col>
           <Col>
-            <Button
-              justification='left'
-              variant='secondary'
-              className={styles.btnAppLogin}
-              onClick={handleLogin}
-            ></Button>{' '}
+            <Button justification='left' variant='secondary' className={styles.btnAppLogin} onClick={handleLogin}></Button>
           </Col>
           <Col>
             <GoogleLogin
