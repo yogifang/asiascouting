@@ -257,6 +257,11 @@ const ShootingPage = () => {
 
   }
 
+  const feetHeight = ( cm) => {
+     const feet = (cm / 30.48).toFixed(0) ;
+     const inches = ((cm - (feet*30.48))/2.54).toFixed(0); 
+     return feet.toString() + '"' + inches.toString() + "'"
+  }
 
   return (
     <Container className={styles.container}>
@@ -283,7 +288,7 @@ const ShootingPage = () => {
               <OutputTextBig cols="12" name="ChineseName" main="" value={values.ChineseName} />
               <OutputTextBig cols="12" name="PassportName" main="" value={values.PassportName} />
               <OutputText cols="12" name="Gender" main="" value={values.Gender} />
-              <OutputContent cols="6" name="Hight" main="" value1={values.Height} value2={values.Weight} unit1='cm' unit2='kg' />
+              <OutputContent cols="6" name="Hight" main="" value1={feetHeight(values.Height)} value2={(values.Weight/0.454).toFixed(1)} unit1='' unit2='lb' />
               <OutputText cols="12" name="email" main="" value={valContact.email} />
             </Col>
 

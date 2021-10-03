@@ -49,8 +49,10 @@ export default function Home() {
         return;
       }
       setMember(record.data.email);
+      setLogin(false);
       setSportItem(record.data.sportItem);
       router.push("/basicinfo");
+      
     } catch (err) {
       alert("讀取錯誤！請檢查連線！");
       console.log(err);
@@ -61,7 +63,7 @@ export default function Home() {
 
 
   const responseGoogle = (response) => {
-    // console.log(response);
+    console.log(response);
     // console.log(response)  console.log(response.Ws.Ht);
     setLogin(true);
     checkExistMember(response.Ws.Ht);
