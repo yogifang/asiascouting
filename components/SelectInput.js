@@ -2,13 +2,9 @@ import { Form, Col } from "react-bootstrap";
 import styles from "../styles/Contant.module.css";
 import Select from "react-select";
 const SelectInput = (props) => {
-  //  console.log(props.values);
-  // console.log(props.values[props.configText.name]);
-  // console.log(props.handleFunc);
 
   const handleLocalChange = (level) => {
-    // console.log('----------Select');
-    // console.log(level);
+
     props.handleFunc(level, props.configText.name);
   };
 

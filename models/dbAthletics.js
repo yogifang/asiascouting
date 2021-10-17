@@ -9,7 +9,7 @@ const BestEvent = {
         points: 0,
         cm: 0,
     },
-    date1: Date(),
+    date1: { type: Date, default: Date.now },
     score2: {
         min: 0,
         sec: 0,
@@ -17,12 +17,12 @@ const BestEvent = {
         points: 0,
         cm: 0,
     },
-    date2: Date(),
+    date2: { type: Date, default: Date.now },
 };
 
 
 
-const schemaAthletics = new mongoose.Schema({
+const schemaAthleticsPerformances = new mongoose.Schema({
     member: String,
     event1: BestEvent,
     event2: BestEvent,
@@ -33,4 +33,4 @@ const schemaAthletics = new mongoose.Schema({
     bFilled: Boolean,
 });
 
-module.exports = mongoose.models.shooting || mongoose.model('athletics', schemaAthletics);
+module.exports = mongoose.models.athleticsPerformances || mongoose.model('athleticsPerformances', schemaAthleticsPerformances);

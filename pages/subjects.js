@@ -172,65 +172,19 @@ const Subjects = () => {
       <div className={styles.contant}>
         <Row>
           <LabelShow configText={LabelSchool} />
-          <TextInput
-            configText={GAP}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={AVG}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
+          <TextInput configText={GAP} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={AVG} handleFunc={handleInputChange} values={values} error={errors} />
           <LabelShow configText={LabelLanguage} />
-          <TextInput
-            configText={TOFEL}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={IELTS}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={TOEIC}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
+          <TextInput configText={TOFEL} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={IELTS} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={TOEIC} handleFunc={handleInputChange} values={values} error={errors} />
           <LabelShow configText={LabelCollage} />
-          <TextInput
-            configText={SAT}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={ACT}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={IntentMajor}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
+          <TextInput configText={ACT} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={IntentMajor} handleFunc={handleInputChange} values={values} error={errors} />
         </Row>
         <Row>
           <br></br>
-          <Button
-            justification="right"
-            onClick={handleClick}
-            variant="secondary"
-            className={styles.btnAppNextSmall}
-          ></Button>{" "}
+          <Button justification="right" onClick={handleClick} variant="secondary" className={styles.btnAppNextSmall} ></Button>
         </Row>
       </div>
     </Container>

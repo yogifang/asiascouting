@@ -205,51 +205,16 @@ const Contacts = () => {
       <Navbar />
       <div className={styles.contant}>
         <Row>
-          <TextInput
-            configText={Email}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <DateInput
-            configText={Birthday}
-            handleFunc={handleDateChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={School}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={LiveCity}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <SelectInput
-            configText={Nationality}
-            handleFunc={selCountryChangeHandler}
-            values={country}
-            error={errors}
-          />
-          <TextInput
-            configText={Links}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
+          <TextInput configText={Email} handleFunc={handleInputChange} values={values} error={errors} />
+          <DateInput configText={Birthday} handleFunc={handleDateChange} values={values} error={errors} />
+          <TextInput configText={School} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={LiveCity} handleFunc={handleInputChange} values={values} error={errors} />
+          <SelectInput configText={Nationality} handleFunc={selCountryChangeHandler} values={country} error={errors} />
+          <TextInput configText={Links} handleFunc={handleInputChange} values={values} error={errors} />
         </Row>
         <Row>
           <br></br>
-          <Button
-            justification="right"
-            onClick={handleClick}
-            variant="secondary"
-            className={styles.btnAppNextSmall}
-          ></Button>{" "}
+          <Button justification="right" onClick={handleClick} variant="secondary" className={styles.btnAppNextSmall} ></Button>{" "}
         </Row>
       </div>
     </Container>

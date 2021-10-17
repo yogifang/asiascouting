@@ -443,111 +443,26 @@ const BaseballPerformance = () => {
               </span>
             </div>
             <LabelShow configText={LabelSprint} />
-            <TextInput
-              configText={Split10Yard}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={Split60Yard}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
+            <TextInput configText={Split10Yard} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput configText={Split60Yard} handleFunc={handleInputChange} values={values} error={errors} />
             <LabelShow configText={LabelPitching} />
-            <TextInput
-              configText={ThrowingSpeed}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={BlockingSpeed}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
+            <TextInput configText={ThrowingSpeed} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput configText={BlockingSpeed} handleFunc={handleInputChange} values={values} error={errors} />
 
-            <TextInput2
-              configText={EraEr}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={GBhr}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={IpHb}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={Hbb}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={Rk}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
+            <TextInput2 configText={EraEr} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={GBhr} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={IpHb} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={Hbb} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={Rk} handleFunc={handleInputChange} values={values} error={errors} />
             <LabelShow configText={LabelHitting} />
-            <TextInput2
-              configText={EvAb}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={Avg2B}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={Ops3B}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={GHR}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={RK}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput2
-              configText={HBBB}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={LastestGameName}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <DateInput
-              configText={LastestGameDate}
-              handleFunc={handleDateChange}
-              values={values}
-              error={errors}
-            />
+            <TextInput2 configText={EvAb} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={Avg2B} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={Ops3B} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={GHR} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={RK} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput2 configText={HBBB} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput configText={LastestGameName} handleFunc={handleInputChange} values={values} error={errors} />
+            <DateInput configText={LastestGameDate} handleFunc={handleDateChange} values={values} error={errors} />
             <div>
               <p className={styles.textpurple}>
                 最近一場比賽成績
@@ -563,37 +478,11 @@ const BaseballPerformance = () => {
                   <span>Pitching Performance</span>
                 </p>
 
-                <TextInput4
-                  configText={EraEr2}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-                <TextInput4
-                  configText={IpHr}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-
-                <TextInput4
-                  configText={HHB}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-                <TextInput4
-                  configText={RBB}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-                <TextInput4
-                  configText={OnlyK}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
+                <TextInput4 configText={EraEr2} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={IpHr} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={HHB} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={RBB} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={OnlyK} handleFunc={handleInputChange} values={values} error={errors} />
               </Col>
             </Col>
             <Col lg="6">
@@ -604,48 +493,17 @@ const BaseballPerformance = () => {
                   <span>Hitting Performance</span>
                 </p>
 
-                <TextInput4
-                  configText={Avg2B2}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-                <TextInput4
-                  configText={Ops3B2}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-                <TextInput4
-                  configText={RHR}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-                <TextInput4
-                  configText={HK}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
-
-                <TextInput4
-                  configText={OnlyBB}
-                  handleFunc={handleInputChange}
-                  values={values}
-                  error={errors}
-                />
+                <TextInput4 configText={Avg2B2} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={Ops3B2} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={RHR} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={HK} handleFunc={handleInputChange} values={values} error={errors} />
+                <TextInput4 configText={OnlyBB} handleFunc={handleInputChange} values={values} error={errors} />
               </Col>
             </Col>
           </Row>
           <Row>
             <br></br>
-            <Button
-              justification="right"
-              onClick={handleClick}
-              variant="secondary"
-              className={styles.btnAppNextSmall}
-            ></Button>{" "}
+            <Button justification="right" onClick={handleClick} variant="secondary" className={styles.btnAppNextSmall} ></Button>{" "}
           </Row>
         </div>
       </div>

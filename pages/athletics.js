@@ -31,7 +31,7 @@ const optionsAthleticsTypes = [
 
 const initBestEvent = {
   item: { value: '', label: '', unit: 'cm' },
-  season: '',
+  season: { value: '', label: '' },
   score1: {
     min: 0,
     sec: 0,
@@ -64,86 +64,104 @@ const initialFValues = {
   bFilled: false,
 };
 
-const Shooting = () => {
-  const { member, setMember } = useContext(Context);
-  const [_id, set_ID] = useState('')
-  let bestevent1 = initBestEvent;
-  let bestevent2 = initBestEvent;
-  let bestevent3 = initBestEvent;
-  let bestevent4 = initBestEvent;
-  let bestevent5 = initBestEvent;
-  let bestevent6 = initBestEvent;
-  let values = {};
+const AthleticsPerformance = () => {
+  const { member, setMember, sportItem, setSportItem } = useContext(Context);
+  const [busy, setBusy] = useState(true);
+  const [bestevent1, setBestevent1] = useState(initBestEvent);
+  const [bestevent2, setBestevent2] = useState(initBestEvent);
+  const [bestevent3, setBestevent3] = useState(initBestEvent);
+  const [bestevent4, setBestevent4] = useState(initBestEvent);
+  const [bestevent5, setBestevent5] = useState(initBestEvent);
+  const [bestevent6, setBestevent6] = useState(initBestEvent);
+  const [id, setId] = useState("");
 
   const findIndexByValue = (options, label) => {
     console.log(label);
     const index = options.findIndex((options) => options.label === label);
     return index;
-    //console.log(options[4].label);
+
   };
 
 
   useEffect(() => {
-    //values.member = recMember.email ;
+    setBusy(true);
+    const getAthleticePerformance = async () => {
+      if (member === undefined) return;
+      console.log('effect.........athletics')
+      const url = process.env.HOST_URI + `api/athleticsPerformance/${member}`;
+      const queryParams = {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      };
+      const [res] = await Promise.all([fetch(url, queryParams)]);
+      const [record] = await Promise.all([res.json()]);
+
+      console.log(record);
+      const data = record.data;
+
+      if (data.bestevent1 !== undefined) { setBestevent1(data.bestevent1); }
+      if (data.bestevent2 !== undefined) { setBestevent1(data.bestevent2); }
+      if (data.bestevent3 !== undefined) { setBestevent1(data.bestevent3); }
+      if (data.bestevent4 !== undefined) { setBestevent1(data.bestevent4); }
+      if (data.bestevent5 !== undefined) { setBestevent1(data.bestevent5); }
+      if (data.bestevent6 !== undefined) { setBestevent1(data.bestevent6); }
+      //  setBestevent2(data.bestevent2);
+      //  setBestevent3(data.bestevent3);
+      //  setBestevent4(data.bestevent4);
+      //  setBestevent5(data.bestevent5);
+      //  setBestevent6(data.bestevent6);
+      setId(data._id);
+      setBusy(false);
+    }
+
+
+    getAthleticePerformance();
+
+    // console.log(bestevent1);
+
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleEventChange = (name, data) => {
 
-    console.log(data)
+    // console.log(data)
     console.log(name)
-    return;
     switch (name) {
       case 'event1':
-        //    setBestevent1(data);
-        bestevent1 = data;
+        setBestevent1(data);
         break;
       case 'event2':
-        //     setBestevent1(data);
-        bestevent2 = data;
+        setBestevent2(data);
         break;
       case 'event3':
-        //      setBestevent1(data);
-
-        bestevent3 = data;
+        setBestevent3(data);
         break;
       case 'event4':
-        //    setBestevent1(data);
-        bestevent4 = data;
+        setBestevent4(data);
         break;
       case 'event5':
-        //     setBestevent1(data);
-        bestevent5 = data;
+        setBestevent5(data);
         break;
       case 'event6':
-        //    setBestevent1(data);
-        bestevent6 = data;
+        setBestevent6(data);
         break;
       default:
         break;
     }
   };
 
-  const handleSelectChange = (level, name) => {
-    //  console.log(name);
-    //  console.log(level);
-    switch (name) {
-      case 'athleticsType':
-        setSelAthleticsType(level);
-        values.athleticsType = level;
-        break;
 
-      default:
-        break;
-    }
-  };
 
   const handleClick = async (e) => {
+    if (member === undefined) {
+      alert('Member is Missing!!');
+      return;
+    }
 
-    Object.assign(values, _id, member, bestevent1, bestevent2, bestevent3, bestevent4, bestevent5, bestevent6);
+    Object.assign(values, { _id: _id }, { member: member }, { event1: bestevent1 }, { event2: bestevent2 }, { event3: bestevent3 }, { event4: bestevent4 }, { event5: bestevent5 }, { event6: bestevent6 },);
     console.log(values);
 
-    if (values._id === '') {
-      const url = process.env.HOST_URI + `api/athleticsPerformance/`;
+    if (_id === '') {
+      const url = process.env.HOST_URI + `api/athleticsPerformance`;
       values.member = member;
 
       const result = await fetch(url, {
@@ -154,7 +172,7 @@ const Shooting = () => {
         body: JSON.stringify(values),
       });
       const data = await result.json();
-      alert('Data is Saved!!');
+      alert('Data is Created!!');
     } else {
       const url = process.env.HOST_URI + `api/athleticsPerformance/${member}`;
       values.member = member;
@@ -195,6 +213,7 @@ const Shooting = () => {
               <h6 className={styles.m0}>最佳成績《二》</h6>
             </Col>
           </Row>
+
           <Row>
             <EventInput name='event1' handleFunc={handleEventChange} values={bestevent1} />
           </Row>
@@ -213,7 +232,7 @@ const Shooting = () => {
           <Row>
             <EventInput name='event6' handleFunc={handleEventChange} values={bestevent6} />
           </Row>
-          <Row>
+          < Row >
             <br></br>
             <Button
               justification='right'
@@ -222,10 +241,12 @@ const Shooting = () => {
               className={styles.btnAppNextSmall}
             ></Button>{' '}
           </Row>
+
         </div>
       </div>
-    </Container>
+    </Container >
   );
 };
 
-export default Shooting;
+
+export default AthleticsPerformance;

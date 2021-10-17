@@ -275,15 +275,8 @@ const ShootingPage = () => {
               <h5 className={styles.sidetitle}></h5>
             </Col>
             <Col sm="3" >
-              <Image
-                placeholder="empty"
-                src={photo.image}
-                alt="Picture of the author"
-                width={210}
-                height={250}
-              />
+              <Image placeholder="empty" src={photo.image} alt="Picture of the author" width={210} height={250} />
             </Col>
-
             <Col sm="3" >
               <OutputTextBig cols="12" name="ChineseName" main="" value={values.ChineseName} />
               <OutputTextBig cols="12" name="PassportName" main="" value={values.PassportName} />
@@ -291,7 +284,6 @@ const ShootingPage = () => {
               <OutputContent cols="6" name="Hight" main="" value1={feetHeight(values.Height)} value2={(values.Weight / 0.454).toFixed(1)} unit1='' unit2='lb' />
               <OutputText cols="12" name="email" main="" value={valContact.email} />
             </Col>
-
             <Col sm="3" >
 
               <FileBase64 type="file" multiple={false} onDone={({ base64 }) => setPhoto({ image: base64 })} />
@@ -312,9 +304,7 @@ const ShootingPage = () => {
               <OutputMonth cols="12" name="expectedgraduationdate" main="High school expected graduation date" value={valContact.birthday} />
               <OutputText cols="12" name="Residence" main="Passport Name" value={valContact.liveCity} />
             </Col>
-
             <Col sm="3" >
-
             </Col>
           </Row>
           <Row className={styles.sheettable}>
@@ -352,7 +342,6 @@ const ShootingPage = () => {
               <h5 className={styles.sidetitle}>performance<br />Shooting</h5>
             </Col>
             <Col sm='3'>
-
               <OutputText cols="12" name="10M60r" main="10M Air Rifle Record(60 shots)" value={valPerformance.best10M60R} />
               <OutputText cols="12" name="50M3x40" main="50M Rifle Record (3x40)" value={valPerformance.best50M3x40} />
               <OutputText cols="12" name="50M3x20" main="50M Rifle Record (3x20)" value={valPerformance.best50M3x20} />
@@ -375,9 +364,7 @@ const ShootingPage = () => {
               <OutputDate cols="12" name="Datelatest" main="Date" value={valPerformance.latestGameDate} />
             </Col>
           </Row>
-
         </div>
-
       </div>
     </Container>
 

@@ -133,7 +133,6 @@ const BasicInfo = () => {
   const [selSecPosition, setSelSecPosition] = useState(optionsPosition[1]);
   const [selHands, setSelHands] = useState(optionsHands[0]);
   const [selGrads, setSelGrads] = useState(optionsGrads[0]);
-  const [dateGrad, setDateGrad] = useState(Date.now());
   const [loaded, setLoaded] = useState(false);
 
   const findIndexByValue = (options, value) => {
@@ -296,18 +295,8 @@ const BasicInfo = () => {
         <Row>
           <p className={styles.textorange}>若以下資料有不便回答者 可填入N</p>
 
-          <TextInput
-            configText={ChineseName}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={PassportName}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
+          <TextInput configText={ChineseName} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={PassportName} handleFunc={handleInputChange} values={values} error={errors} />
 
           <Col lg="5">
             <Form.Label type="radio" className={styles.colLeftMain}>
@@ -318,93 +307,27 @@ const BasicInfo = () => {
           <Col lg="7">
             <Form>
               <div key={`inline-radio`} className="mb-3" id="genderSel">
-                <Form.Check
-                  inline
-                  label="男"
-                  name="Male"
-                  type={"radio"}
-                  id={`inline-radio-1`}
-                  checked={radioGenger === "Male"}
-                  onChange={handleRadioGender}
-                />
-                <Form.Check
-                  inline
-                  label="女"
-                  name="Female"
-                  type={"radio"}
-                  id={`inline-radio-2`}
-                  checked={radioGenger === "Female"}
-                  onChange={handleRadioGender}
-                />
-                <Form.Check
-                  inline
-                  label="其它"
-                  name="Others"
-                  type={"radio"}
-                  id={`inline-radio-3`}
-                  checked={radioGenger === "Others"}
-                  onChange={handleRadioGender}
-                />
+                <Form.Check inline label="男" name="Male" type={"radio"} id={`inline-radio-1`} checked={radioGenger === "Male"} onChange={handleRadioGender} />
+                <Form.Check inline label="女" name="Female" type={"radio"} id={`inline-radio-2`} checked={radioGenger === "Female"} onChange={handleRadioGender} />
+                <Form.Check inline label="其它" name="Others" type={"radio"} id={`inline-radio-3`} checked={radioGenger === "Others"} onChange={handleRadioGender} />
               </div>
             </Form>
           </Col>
           {sportItem === "baseball" ? (
             <>
-              <SelectInput
-                configText={PrimePostion}
-                handleFunc={handleSelectChange}
-                values={selPriPosition}
-                error={errors}
-              />
-
-              <SelectInput
-                configText={SecondPostion}
-                handleFunc={handleSelectChange}
-                values={selSecPosition}
-                error={errors}
-              />
-              <SelectInput
-                configText={Handers}
-                handleFunc={handleSelectChange}
-                values={selHands}
-                error={errors}
-              />
+              <SelectInput configText={PrimePostion} handleFunc={handleSelectChange} values={selPriPosition} error={errors} />
+              <SelectInput configText={SecondPostion} handleFunc={handleSelectChange} values={selSecPosition} error={errors} />
+              <SelectInput configText={Handers} handleFunc={handleSelectChange} values={selHands} error={errors} />
             </>
           ) : null}
-
-          <TextInput
-            configText={Height}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <TextInput
-            configText={Weight}
-            handleFunc={handleInputChange}
-            values={values}
-            error={errors}
-          />
-          <SelectInput
-            configText={CurrentGrad}
-            handleFunc={handleSelectChange}
-            values={selGrads}
-            error={errors}
-          />
-          <MonthInput
-            configText={GradDate}
-            handleFunc={handleDateChange}
-            values={values}
-            error={errors}
-          />
+          <TextInput configText={Height} handleFunc={handleInputChange} values={values} error={errors} />
+          <TextInput configText={Weight} handleFunc={handleInputChange} values={values} error={errors} />
+          <SelectInput configText={CurrentGrad} handleFunc={handleSelectChange} values={selGrads} error={errors} />
+          <MonthInput configText={GradDate} handleFunc={handleDateChange} values={values} error={errors} />
         </Row>
         <Row>
           <br></br>
-          <Button
-            justification="right"
-            onClick={handleClick}
-            variant="secondary"
-            className={styles.btnAppNextSmall}
-          ></Button>{" "}
+          <Button justification="right" onClick={handleClick} variant="secondary" className={styles.btnAppNextSmall} ></Button>{" "}
         </Row>
       </div>
     </Container>

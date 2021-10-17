@@ -198,19 +198,11 @@ const CreateSocial = () => {
                     </Col>
                     <Col lg="6">
                         <label>
-                            <input
-                                name="passport"
-                                type="radio"
-                                onChange={handleInputChange}
-                            />
+                            <input name="passport" type="radio" onChange={handleInputChange} />
                             <span> 是 </span> <span> YES </span>
                         </label>
                         <label>
-                            <input
-                                name="passport"
-                                type="radio"
-                                onChange={handleInputChange}
-                            />
+                            <input name="passport" type="radio" onChange={handleInputChange} />
                             <span> 否 </span> <span> NO </span>
                         </label>
                     </Col>
@@ -254,20 +246,11 @@ const CreateSocial = () => {
                         </span>
                     </p>
                     <Form.Label className={styles.m0}>
-                        <input
-                            name="isPrivacy"
-                            type="checkbox"
-                            onChange={handleInputChange}
-                        />{" "}
+                        <input name="isPrivacy" type="checkbox" onChange={handleInputChange} />{" "}
                         <span> 是 </span> <span> YES </span>{" "}
                     </Form.Label>
                     <br></br>
-                    <Button
-                        justification="right"
-                        variant="secondary"
-                        className={styles.btnAppLoginSmall}
-                        onClick={handleClick}
-                    ></Button>{" "}
+                    <Button justification="right" variant="secondary" className={styles.btnAppLoginSmall} onClick={handleClick} ></Button>{" "}
                 </Row>
             </div>
         </Container>

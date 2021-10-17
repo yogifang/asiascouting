@@ -64,8 +64,8 @@ const optionsAllItems = [
 ];
 
 const initBestEvent = {
-  item: '',
-  season: '',
+  item: { value: '', label: '', unit: 'cm' },
+  season: { value: '', label: '' },
   score1: {
     min: 0,
     sec: 0,
@@ -86,18 +86,17 @@ const initBestEvent = {
 
 
 const EventInput = (props) => {
-  const [selItems, setSelItems] = useState(props.values.item);
-  const [selSeason, setSelSeason] = useState(optionsSeasons[0]);
 
-  const [date1, setDate1] = useState(null)
-  const [date2, setDate2] = useState(null)
+
+  // const values = (props.values === undefined) ? initBestEvent : props.values;
 
   const values = props.values;
-  let selItem = values.item;
   const eventName = props.name;
-
+  // console.log(eventName);
   let calcValue = values;
-  // console.log(props.values);
+  console.log(eventName);
+  console.log(values);
+
 
   const customStyles = {
     control: (base) => ({
@@ -137,25 +136,25 @@ const EventInput = (props) => {
 
   const handleSelectItem = (level) => {
     //  console.log(level);
-    setSelItems(level);
+    // setSelItems(level);
     calcValue.item = level;
     handleLocalChange();
   };
   const handleSelectSeason = (level) => {
     // console.log(level);
-    setSelSeason(level);
+    // setSelSeason(level);
     calcValue.season = level;
     handleLocalChange();
   };
   const handleDate1Change = (date) => {
-    setDate1(date);
-    calcValue.date1 = date1;
+    //  setDate1(date);
+    calcValue.date1 = date;
     handleLocalChange();
   };
 
   const handleDate2Change = (date) => {
-    setDate2(date);
-    calcValue.date2 = date2;
+    //  setDate2(date);
+    calcValue.date2 = date;
     handleLocalChange();
   };
 
@@ -248,7 +247,7 @@ const EventInput = (props) => {
                 className={styles.eventselect}
                 name='item'
                 autosize={true}
-                value={selItems}
+                value={values.item}
                 onChange={handleSelectItem}
                 options={optionsAllItems}
                 styles={customStyles}
@@ -262,7 +261,7 @@ const EventInput = (props) => {
                 className={styles.eventselect}
                 name='season'
                 autosize={true}
-                value={selSeason}
+                value={values.season}
                 onChange={handleSelectSeason}
                 options={optionsSeasons}
                 styles={customStyles}
@@ -273,36 +272,36 @@ const EventInput = (props) => {
 
         <Col lg='4'>
           <InputGroup className='mb-3'>
-            {selItems.unit === 'second' ? (
+            {values.item.unit === 'second' ? (
               <>
                 <div className={styles.colRightMain}>
-                  <Form.Control name='Min1' size='sm' type='number' placeholder='Min' defaultValue={calcValue.score1.min} onChange={handleNumberChange} />
+                  <Form.Control name='Min1' size='sm' type='number' placeholder='Min' value={values.score1.min} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分</Form.Label>
                 </div>
 
                 <div className={styles.colRightMain}>
-                  <Form.Control name='Sec1' size='sm' type='number' placeholder='Sec' defaultValue={calcValue.score1.sec} onChange={handleNumberChange} />
+                  <Form.Control name='Sec1' size='sm' type='number' placeholder='Sec' value={values.score1.sec} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>秒</Form.Label>
                 </div>
                 <div className={styles.colRightMain}>
-                  <Form.Control name='Hud1' size='sm' type='number' placeholder='Hun' defaultValue={calcValue.score1.hud} onChange={handleNumberChange} />
+                  <Form.Control name='Hud1' size='sm' type='number' placeholder='Hun' value={values.score1.hud} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>百分之一秒</Form.Label>
                 </div>
               </>
             ) : null}
-            {selItems.unit === 'cm' ? (
+            {values.item.unit === 'cm' ? (
               <>
                 <div className={styles.colRightMain1}>
-                  <Form.Control name='CM1' size='sm' type='number' placeholder='cm' defaultValue={calcValue.score1.cm} onChange={handleNumberChange} />
+                  <Form.Control name='CM1' size='sm' type='number' placeholder='cm' value={values.score1.cm} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>公分</Form.Label>
                 </div>
 
               </>
             ) : null}
-            {selItems.unit === 'points' ? (
+            {values.item.unit === 'points' ? (
               <>
                 <div className={styles.colRightMain1}>
-                  <Form.Control name='Points1' size='sm' type='number' placeholder='points' defaultValue={calcValue.score1.points} onChange={handleNumberChange} />
+                  <Form.Control name='Points1' size='sm' type='number' placeholder='points' value={values.score1.points} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分數</Form.Label>
                 </div>
 
@@ -314,11 +313,11 @@ const EventInput = (props) => {
                   id={props.name + 'date1'}
                   className={styles.datepicker}
                   onChange={(date) => handleDate1Change(date)}
-                  value={date1}
+                  value={values.date1}
                   scrollableYearDropdown
                   showYearDropdown
                   name='date1'
-                  selected={Date.parse(date1)}
+                  selected={Date.parse(values.date1)}
                   dateFormatCalendar='MMMM'
                 />
                 <Form.Label className={styles.colRightSub}>日期</Form.Label>
@@ -330,36 +329,36 @@ const EventInput = (props) => {
 
         <Col lg='4'>
           <InputGroup className='mb-3'>
-            {selItems.unit === 'second' ? (
+            {values.item.unit === 'second' ? (
               <>
                 <div className={styles.colRightMain}>
-                  <Form.Control name='Min2' size='sm' type='number' placeholder='Min' defaultValue={calcValue.score1.min} onChange={handleNumberChange} />
+                  <Form.Control name='Min2' size='sm' type='number' placeholder='Min' value={values.score2.min} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分</Form.Label>
                 </div>
 
                 <div className={styles.colRightMain}>
-                  <Form.Control name='Sec2' size='sm' type='number' placeholder='Sec' defaultValue={calcValue.score1.sec} onChange={handleNumberChange} />
+                  <Form.Control name='Sec2' size='sm' type='number' placeholder='Sec' value={values.score2.sec} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>秒</Form.Label>
                 </div>
                 <div className={styles.colRightMain}>
-                  <Form.Control name='Hud2' size='sm' type='number' placeholder='Hun' defaultValue={calcValue.score1.hud} onChange={handleNumberChange} />
+                  <Form.Control name='Hud2' size='sm' type='number' placeholder='Hun' value={values.score2.hud} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>百分之一秒</Form.Label>
                 </div>
               </>
             ) : null}
-            {selItems.unit === 'cm' ? (
+            {values.item.unit === 'cm' ? (
               <>
                 <div className={styles.colRightMain1}>
-                  <Form.Control name='CM2' size='sm' type='number' placeholder='cm' defaultValue={calcValue.score1.cm} onChange={handleNumberChange} />
+                  <Form.Control name='CM2' size='sm' type='number' placeholder='cm' value={values.score2.cm} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>公分</Form.Label>
                 </div>
 
               </>
             ) : null}
-            {selItems.unit === 'points' ? (
+            {values.item.unit === 'points' ? (
               <>
                 <div className={styles.colRightMain1}>
-                  <Form.Control name='Points2' size='sm' type='number' placeholder='points' defaultValue={calcValue.score1.points} onChange={handleNumberChange} />
+                  <Form.Control name='Points2' size='sm' type='number' placeholder='points' value={values.score2.points} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分數</Form.Label>
                 </div>
 
@@ -371,11 +370,11 @@ const EventInput = (props) => {
                   id={props.name + 'date2'}
                   className={styles.datepicker}
                   onChange={(date) => handleDate2Change(date)}
-                  value={date2}
+                  value={values.date2}
                   scrollableYearDropdown
                   showYearDropdown
                   name='date2'
-                  selected={Date.parse(date2)}
+                  selected={Date.parse(values.date2)}
                   dateFormatCalendar='MMMM'
                 />
                 <Form.Label className={styles.colRightSub}>日期</Form.Label>

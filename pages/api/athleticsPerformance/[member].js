@@ -27,6 +27,7 @@ export default async (req, res) => {
             break;
         case "PUT":
             try {
+                console.log(req.body._id)
                 const athleticsPerformance = await AthleticsPerformance.findByIdAndUpdate(
                     req.body._id,
                     req.body,

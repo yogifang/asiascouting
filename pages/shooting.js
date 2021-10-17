@@ -323,112 +323,27 @@ const Shooting = () => {
           <Row>
             <p className={styles.textpurple}>射擊成績及運動表現</p>
             <p className={styles.textorange}>若以下資料有不便回答者 可填入N</p>
-            <TextInput
-              configText={LatestGameName}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={LastestScore}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <DateInput
-              configText={LatestGameDate}
-              handleFunc={handleDateChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={Best10M60R}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <SelectInput
-              configText={Best10MLevel}
-              handleFunc={handleSelectChange}
-              values={selBest10MLevel}
-              error={errors}
-            />
-            <DateInput
-              configText={Best10MDate}
-              handleFunc={handleDateChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={Best50M3x40}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <SelectInput
-              configText={Best50M3x40Level}
-              handleFunc={handleSelectChange}
-              values={selBest50M3x40Level}
-              error={errors}
-            />
-            <DateInput
-              configText={Best50M3x40Date}
-              handleFunc={handleDateChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={Best50M3x20}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <SelectInput
-              configText={Best50M3x20Level}
-              handleFunc={handleSelectChange}
-              values={selBest50M3x20Level}
-              error={errors}
-            />
-            <DateInput
-              configText={Best50M3x20Date}
-              handleFunc={handleDateChange}
-              values={values}
-              error={errors}
-            />
+            <TextInput configText={LatestGameName} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput configText={LastestScore} handleFunc={handleInputChange} values={values} error={errors} />
+            <DateInput configText={LatestGameDate} handleFunc={handleDateChange} values={values} error={errors} />
+            <TextInput configText={Best10M60R} handleFunc={handleInputChange} values={values} error={errors} />
+            <SelectInput configText={Best10MLevel} handleFunc={handleSelectChange} values={selBest10MLevel} error={errors} />
+            <DateInput configText={Best10MDate} handleFunc={handleDateChange} values={values} error={errors} />
+            <TextInput configText={Best50M3x40} handleFunc={handleInputChange} values={values} error={errors} />
+            <SelectInput configText={Best50M3x40Level} handleFunc={handleSelectChange} values={selBest50M3x40Level} error={errors} />
+            <DateInput configText={Best50M3x40Date} handleFunc={handleDateChange} values={values} error={errors} />
+            <TextInput configText={Best50M3x20} handleFunc={handleInputChange} values={values} error={errors} />
+            <SelectInput configText={Best50M3x20Level} handleFunc={handleSelectChange} values={selBest50M3x20Level} error={errors} />
+            <DateInput configText={Best50M3x20Date} handleFunc={handleDateChange} values={values} error={errors} />
 
-            <TextInput
-              configText={RankNational}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={RankWorld}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={LinkISSF}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
-            <TextInput
-              configText={LinkVideo}
-              handleFunc={handleInputChange}
-              values={values}
-              error={errors}
-            />
+            <TextInput configText={RankNational} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput configText={RankWorld} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput configText={LinkISSF} handleFunc={handleInputChange} values={values} error={errors} />
+            <TextInput configText={LinkVideo} handleFunc={handleInputChange} values={values} error={errors} />
           </Row>
           <Row>
             <br></br>
-            <Button
-              justification="right"
-              onClick={handleClick}
-              variant="secondary"
-              className={styles.btnAppNextSmall}
-            ></Button>{" "}
+            <Button justification="right" onClick={handleClick} variant="secondary" className={styles.btnAppNextSmall} ></Button>
           </Row>
         </div>
       </div>

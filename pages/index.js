@@ -63,7 +63,7 @@ export default function Home() {
 
 
   const responseGoogle = (response) => {
-    // console.log(response.profileObj);
+    console.log(response.profileObj);
 
     //console.log(response.profileObj.email);
     setLogin(true);
