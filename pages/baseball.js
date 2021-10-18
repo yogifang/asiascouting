@@ -448,7 +448,6 @@ const BaseballPerformance = () => {
             <LabelShow configText={LabelPitching} />
             <TextInput configText={ThrowingSpeed} handleFunc={handleInputChange} values={values} error={errors} />
             <TextInput configText={BlockingSpeed} handleFunc={handleInputChange} values={values} error={errors} />
-
             <TextInput2 configText={EraEr} handleFunc={handleInputChange} values={values} error={errors} />
             <TextInput2 configText={GBhr} handleFunc={handleInputChange} values={values} error={errors} />
             <TextInput2 configText={IpHb} handleFunc={handleInputChange} values={values} error={errors} />

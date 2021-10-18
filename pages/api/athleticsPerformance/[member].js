@@ -9,14 +9,14 @@ export default async (req, res) => {
         method,
     } = req;
 
-    console.log('althetics------')
+   // console.log('althetics------')
     switch (method) {
         case "GET":
             try {
                 const athleticsPerformance = await AthleticsPerformance.findOne({
                     member,
                 }).exec();
-                console.log(athleticsPerformance);
+             //   console.log(athleticsPerformance);
                 if (!athleticsPerformance) {
                     return res.status(400).json({ success: false });
                 }

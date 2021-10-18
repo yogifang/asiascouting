@@ -39,7 +39,7 @@ const initBestEvent = {
     points: 0,
     cm: 0,
   },
-  date1: Date(Date.now()),
+  date1: Date.now(),
   score2: {
     min: 0,
     sec: 0,
@@ -47,9 +47,9 @@ const initBestEvent = {
     points: 0,
     cm: 0,
   },
-  date2: Date(Date.now()),
-};
 
+  date2: Date.now(),
+};
 
 
 const initialFValues = {
@@ -83,7 +83,8 @@ const AthleticsPerformance = () => {
   };
 
 
-  useEffect(() => {
+  useEffect(
+    () => {
     setBusy(true);
     const getAthleticePerformance = async () => {
       if (member === undefined) return;
@@ -99,17 +100,18 @@ const AthleticsPerformance = () => {
       console.log(record);
       const data = record.data;
 
-      if (data.bestevent1 !== undefined) { setBestevent1(data.bestevent1); }
-      if (data.bestevent2 !== undefined) { setBestevent1(data.bestevent2); }
-      if (data.bestevent3 !== undefined) { setBestevent1(data.bestevent3); }
-      if (data.bestevent4 !== undefined) { setBestevent1(data.bestevent4); }
-      if (data.bestevent5 !== undefined) { setBestevent1(data.bestevent5); }
-      if (data.bestevent6 !== undefined) { setBestevent1(data.bestevent6); }
-      //  setBestevent2(data.bestevent2);
-      //  setBestevent3(data.bestevent3);
-      //  setBestevent4(data.bestevent4);
-      //  setBestevent5(data.bestevent5);
-      //  setBestevent6(data.bestevent6);
+      //if (data.bestevent1 !== undefined) { setBestevent1(data.bestevent1); }
+     // if (data.bestevent2 !== undefined) { setBestevent1(data.bestevent2); }
+     // if (data.bestevent3 !== undefined) { setBestevent1(data.bestevent3); }
+     // if (data.bestevent4 !== undefined) { setBestevent1(data.bestevent4); }
+      //if (data.bestevent5 !== undefined) { setBestevent1(data.bestevent5); }
+      //if (data.bestevent6 !== undefined) { setBestevent1(data.bestevent6); }
+    //  setBestevent1(data.bestevent1);
+     // setBestevent2(data.bestevent2);
+    //  setBestevent3(data.bestevent3);
+    //  setBestevent4(data.bestevent4);
+     // setBestevent5(data.bestevent5);
+    //  setBestevent6(data.bestevent6);
       setId(data._id);
       setBusy(false);
     }
@@ -125,28 +127,39 @@ const AthleticsPerformance = () => {
 
     // console.log(data)
     console.log(name)
+    console.log(data)
+    let tmpData = {};
+    let field ;
+    for (field in data) {
+      tmpData[field] = data[field];
+   
+    }
+    
+   console.log(tmpData)
     switch (name) {
       case 'event1':
-        setBestevent1(data);
+        setBestevent1({}) ;
+        setBestevent1(tmpData);
         break;
       case 'event2':
-        setBestevent2(data);
+        setBestevent2(tmpData);
         break;
       case 'event3':
-        setBestevent3(data);
+        setBestevent3(tmpData);
         break;
       case 'event4':
-        setBestevent4(data);
+        setBestevent4(tmpData);
         break;
       case 'event5':
-        setBestevent5(data);
+        setBestevent5(tmpData);
         break;
       case 'event6':
-        setBestevent6(data);
+        setBestevent6(tmpData);
         break;
       default:
         break;
     }
+   // console.log(bestevent1)
   };
 
 
@@ -247,6 +260,5 @@ const AthleticsPerformance = () => {
     </Container >
   );
 };
-
 
 export default AthleticsPerformance;
