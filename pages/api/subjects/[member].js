@@ -13,7 +13,7 @@ export default async (req, res) => {
     case "GET":
       try {
         const subject = await Subjects.findOne({ member }).exec();
-        console.log(subject);
+   //     console.log(subject);
         if (!subject) {
           return res.status(400).json({ success: false });
         }

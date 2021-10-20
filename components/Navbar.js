@@ -10,8 +10,7 @@ const AppNavbar = () => {
   const router = useRouter();
 
   const handleButtonClick = (event, path) => {
-    // console.log(event);
-    // console.log(path);
+    
     event.preventDefault();
     router.push(path);
   };
@@ -63,7 +62,7 @@ const AppNavbar = () => {
         <Button
           size="sm"
           variant="light"
-          onClick={(e) => handleButtonClick(e, (sportItem === 'shooting') ? "/shootingPage" : "baseballPage")}
+          onClick={(e) => handleButtonClick(e, (sportItem === 'shooting') ? "shootingPage" : (sportItem === 'baseball') ? "baseballPage" : "athleticsPage")}
           className={member === "" ? "disabled" : "disabled:false"}
         >
           <span>

@@ -207,7 +207,7 @@ const ShootingPage = () => {
         getBaseballInfo();
         getContacts();
         getSubjects();
-        getPerformance();
+  //      getPerformance();
         getPhoto();
         // setLoaded(true);
     }, [])
@@ -261,7 +261,7 @@ const ShootingPage = () => {
     return (
         <Container className={styles.container}>
             <Navbar />
-            <h2 className={styles.m0}>Shooting Pages</h2>
+            <h2 className={styles.m0}>Athletics Pages</h2>
             <div className={styles.contant}>
 
                 <div className={styles.sheettable} style={{ width: '1024px' }}>
@@ -343,34 +343,7 @@ const ShootingPage = () => {
                         </Col>
                     </Row>
 
-                    <Row className={styles.sheettable}>
-                        <Col className={styles.sidecolumn} sm='2'>
-                            <h5 className={styles.sidetitle}>performance<br />Shooting</h5>
-                        </Col>
-                        <Col sm='3'>
-
-                            <OutputText cols="12" name="10M60r" main="10M Air Rifle Record(60 shots)" value={valPerformance.best10M60R} />
-                            <OutputText cols="12" name="50M3x40" main="50M Rifle Record (3x40)" value={valPerformance.best50M3x40} />
-                            <OutputText cols="12" name="50M3x20" main="50M Rifle Record (3x20)" value={valPerformance.best50M3x20} />
-                            <OutputText cols="12" name="LatestName" main="Latest Competition Name" value={valPerformance.latestGameName} />
-                            <OutputText cols="12" name="NationalRank" main="National Rank" value={valPerformance.rankNational} />
-                            <OutputText cols="12" name="ISSFProfileLink" main="ISSF Profile Link" value={valPerformance.linkISSF} />
-                            <OutputText cols="12" name="ISSFProfileLink" main="Showcasing Vidoes" value={valPerformance.linkVideo} />
-                        </Col>
-                        <Col sm='3'>
-                            <OutputText cols="12" name="10M60r" main="Record Broken in What Level" value={valPerformance.best10MLevel} />
-                            <OutputText cols="12" name="50M3x40" main="Record Broken in What Level" value={valPerformance.best50M3x40Level} />
-                            <OutputText cols="12" name="50M3x20" main="Record Broken in What Level" value={valPerformance.best50M3x20Level} />
-                            <OutputText cols="12" name="latestScore" main="Latest Competition Score" value={valPerformance.latestScore} />
-                            <OutputText cols="12" name="NationalRank" main="World Rank" value={valPerformance.rankWorld} />
-                        </Col>
-                        <Col sm='3'>
-                            <OutputDate cols="12" name="Date10M" main="Date" value={valPerformance.best10MDate} />
-                            <OutputDate cols="12" name="Date50M3x40" main="Date" value={valPerformance.best50M3x40Date} />
-                            <OutputDate cols="12" name="Date50M3x20" main="Date" value={valPerformance.best50M3x20Date} />
-                            <OutputDate cols="12" name="Datelatest" main="Date" value={valPerformance.latestGameDate} />
-                        </Col>
-                    </Row>
+                   
 
                 </div>
 

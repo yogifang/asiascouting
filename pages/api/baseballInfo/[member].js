@@ -13,7 +13,7 @@ export default async (req, res) => {
     case "GET":
       try {
         const baseballinfo = await BaseballInfo.findOne({ member }).exec();
-        console.log(baseballinfo);
+     //   console.log(baseballinfo);
         if (!baseballinfo) {
           return res.status(400).json({ success: false });
         }

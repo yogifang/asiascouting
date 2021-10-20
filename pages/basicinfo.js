@@ -134,7 +134,7 @@ const BasicInfo = () => {
   const [selHands, setSelHands] = useState(optionsHands[0]);
   const [selGrads, setSelGrads] = useState(optionsGrads[0]);
   const [loaded, setLoaded] = useState(false);
-
+  const [dateGrad , setDateGrad] = useState(Date.now()) ;
   const findIndexByValue = (options, value) => {
     const index = options.findIndex((options) => options.value === value);
     return index;
@@ -214,8 +214,8 @@ const BasicInfo = () => {
 
   const handleRadioGender = (e) => {
     setRadioGender(e.target.name);
-    //console.log(e.target);
-    values.Gender = e.target.value;
+    console.log(e.target);
+    values.Gender = e.target.name;
   };
 
   const handleDateChange = (date, name) => {

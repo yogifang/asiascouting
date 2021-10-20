@@ -88,14 +88,18 @@ const initBestEvent = {
 
 const EventInput = (props) => {
   // const values = (props.values === undefined) ? initBestEvent : props.values;
-  const values = props.values;
+  
   const eventName = props.name;
   // console.log(eventName);
-  let calcValue = values;
-  console.log(eventName);
-  console.log(values);
-
-
+  let values ={};
+  values.item = props.item ;
+  values.season = props.season ;
+  values.score1 = props.score1 ;
+  values.date1 = props.date1 ;
+  values.score2 = props.score2 ;
+  values.date2 = props.date2 ;
+ // console.log(eventName);
+ // console.log(values);
   const customStyles = {
     control: (base) => ({
       ...base,
@@ -134,89 +138,90 @@ const EventInput = (props) => {
 
   const handleSelectItem = (level) => {
    
-    calcValue.item = level;
+    values.item = level;
     handleLocalChange();
   };
   const handleSelectSeason = (level) => {
     
-    calcValue.season = level;
+    values.season = level;
     handleLocalChange();
   };
   const handleDate1Change = (date) => {
     //  setDate1(date);
-    calcValue.date1 = date;
+    values.date1 = date;
     handleLocalChange();
   };
 
   const handleDate2Change = (date) => {
     //  setDate2(date);
-    calcValue.date2 = date;
+    values.date2 = date;
     handleLocalChange();
   };
 
 
   const handleNumberChange = (event) => {
     const num = parseInt(event.target.value);
-    console.log(event.target.name);
-
-    switch (event.target.name) {
+    
+    const targetName = event.target.name.replace(eventName , '') ;
+    console.log(targetName);
+    switch (targetName) {
       case 'Min1':
-        calcValue.score1.min = num;
-        calcValue.score1.points = null;
-        calcValue.score1.cm = null;
+        values.score1.min = num;
+        values.score1.points = null;
+        values.score1.cm = null;
         break;
       case 'Min2':
-        calcValue.score2.min = num;
-        calcValue.score2.points = null;
-        calcValue.score2.cm = null;
+        values.score2.min = num;
+        values.score2.points = null;
+        values.score2.cm = null;
         break;
       case 'Sec1':
-        calcValue.score1.sec = num;
-        calcValue.score1.points = null;
-        calcValue.score1.cm = null;
+        values.score1.sec = num;
+        values.score1.points = null;
+        values.score1.cm = null;
         break;
       case 'Sec2':
-        calcValue.score2.sec = num;
-        calcValue.score2.points = null;
-        calcValue.score2.cm = null;
+        values.score2.sec = num;
+        values.score2.points = null;
+        values.score2.cm = null;
         break;
       case 'Hud1':
-        calcValue.score1.hud = num;
-        calcValue.score1.points = null;
-        calcValue.score1.cm = null;
+        values.score1.hud = num;
+        values.score1.points = null;
+        values.score1.cm = null;
         break;
       case 'Hud2':
-        calcValue.score2.hud = num;
-        calcValue.score2.points = null;
-        calcValue.score2.cm = null;
+        values.score2.hud = num;
+        values.score2.points = null;
+        values.score2.cm = null;
         break;
       case 'CM1':
-        calcValue.score1.cm = num;
-        calcValue.score1.points = null;
-        calcValue.score1.min = null;
-        calcValue.score1.sec = null;
-        calcValue.score1.hud = null;
+        values.score1.cm = num;
+        values.score1.points = null;
+        values.score1.min = null;
+        values.score1.sec = null;
+        values.score1.hud = null;
         break;
       case 'Points1':
-        calcValue.score1.points = num;
-        calcValue.score1.cm = null;
-        calcValue.score1.min = null;
-        calcValue.score1.sec = null;
-        calcValue.score1.hud = null;
+        values.score1.points = num;
+        values.score1.cm = null;
+        values.score1.min = null;
+        values.score1.sec = null;
+        values.score1.hud = null;
         break;
       case 'CM2':
-        calcValue.score2.cm = num;
-        calcValue.score2.points = null;
-        calcValue.score2.min = null;
-        calcValue.score2.sec = null;
-        calcValue.score2.hud = null;
+        values.score2.cm = num;
+        values.score2.points = null;
+        values.score2.min = null;
+        values.score2.sec = null;
+        values.score2.hud = null;
         break;
       case 'Points2':
-        calcValue.score2.points = num;
-        calcValue.score2.cm = null;
-        calcValue.score2.min = null;
-        calcValue.score2.sec = null;
-        calcValue.score2.hud = null;
+        values.score2.points = num;
+        values.score2.cm = null;
+        values.score2.min = null;
+        values.score2.sec = null;
+        values.score2.hud = null;
         break;
       default:
         break;
@@ -227,7 +232,7 @@ const EventInput = (props) => {
 
   const handleLocalChange = () => {
 
-    props.handleFunc(eventName, calcValue);
+    props.handleFunc(eventName, values);
   };
 
   return (
@@ -237,8 +242,8 @@ const EventInput = (props) => {
           <InputGroup className='mb-3' >
             <Col lg='6'>
               <Select
-                id={props.name + 's1'}
-                instanceId={props.name + 's1'}
+                id={eventName + 's1'}
+                instanceId={eventName + 's1'}
                 placeholder='選取比賽項目'
                 className={styles.eventselect}
                 name='item'
@@ -251,8 +256,8 @@ const EventInput = (props) => {
             </Col>
             <Col lg='6'>
               <Select
-                id={props.name + 'season'}
-                instanceId={props.name + 'season'}
+                id={eventName + 'season'}
+                instanceId={eventName + 'season'}
                 placeholder='室內/戶外'
                 className={styles.eventselect}
                 name='season'
@@ -271,16 +276,16 @@ const EventInput = (props) => {
             {values.item.unit === 'second' ? (
               <>
                 <div className={styles.colRightMain}>
-                  <Form.Control  name={props.name + 'Min1'} size='sm' type='number' placeholder='Min' value={values.score1.min} onChange={handleNumberChange} />
+                  <Form.Control  name={eventName + 'Min1'} size='sm' type='number' placeholder='Min' value={values.score1.min} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分</Form.Label>
                 </div>
 
                 <div className={styles.colRightMain}>
-                  <Form.Control name={props.name + 'Sec1'} size='sm' type='number' placeholder='Sec' value={values.score1.sec} onChange={handleNumberChange} />
+                  <Form.Control name={eventName + 'Sec1'} size='sm' type='number' placeholder='Sec' value={values.score1.sec} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>秒</Form.Label>
                 </div>
                 <div className={styles.colRightMain}>
-                  <Form.Control name={props.name + 'Hud1'} size='sm' type='number' placeholder='Hun' value={values.score1.hud} onChange={handleNumberChange} />
+                  <Form.Control name={eventName + 'Hud1'} size='sm' type='number' placeholder='Hun' value={values.score1.hud} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>百分之一秒</Form.Label>
                 </div>
               </>
@@ -288,7 +293,7 @@ const EventInput = (props) => {
             {values.item.unit === 'cm' ? (
               <>
                 <div className={styles.colRightMain1}>
-                  <Form.Control name={props.name + 'CM1'} size='sm' type='number' placeholder='cm' value={values.score1.cm} onChange={handleNumberChange} />
+                  <Form.Control name={eventName + 'CM1'} size='sm' type='number' placeholder='cm' value={values.score1.cm} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>公分</Form.Label>
                 </div>
 
@@ -297,7 +302,7 @@ const EventInput = (props) => {
             {values.item.unit === 'points' ? (
               <>
                 <div className={styles.colRightMain1}>
-                  <Form.Control name={props.name +'Points1'} size='sm' type='number' placeholder='points' value={values.score1.points} onChange={handleNumberChange} />
+                  <Form.Control name={eventName +'Points1'} size='sm' type='number' placeholder='points' value={values.score1.points} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分數</Form.Label>
                 </div>
 
@@ -306,16 +311,16 @@ const EventInput = (props) => {
             <span>
               <div className={styles.colRightMain1}>
                 <DatePicker
-                  id={props.name + 'date1'}
+                  id={eventName + 'date1'}
                   className={styles.datepicker}
-                  onChange={(date) => handleDate1Change(date)}
+                  onChange={handleDate1Change}
                   value={values.date1}
                   scrollableYearDropdown
                   showYearDropdown
                   name='date1'
-                  selected={Date.parse(values.date1)}
+                  selected={values.date1}
                   dateFormatCalendar='MMMM'
-                  dateFormat="mm/dd/yyyy"
+                  dateFormat="dd/MM/yyyy"
                 />
                 <Form.Label className={styles.colRightSub}>日期</Form.Label>
               </div>
@@ -329,16 +334,16 @@ const EventInput = (props) => {
             {values.item.unit === 'second' ? (
               <>
                 <div className={styles.colRightMain}>
-                  <Form.Control name={props.name +'Min2'} size='sm' type='number' placeholder='Min' value={values.score2.min} onChange={handleNumberChange} />
+                  <Form.Control name={eventName +'Min2'} size='sm' type='number' placeholder='Min' value={values.score2.min} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分</Form.Label>
                 </div>
 
                 <div className={styles.colRightMain}>
-                  <Form.Control name={props.name +'Sec2'} size='sm' type='number' placeholder='Sec' value={values.score2.sec} onChange={handleNumberChange} />
+                  <Form.Control name={eventName +'Sec2'} size='sm' type='number' placeholder='Sec' value={values.score2.sec} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>秒</Form.Label>
                 </div>
                 <div className={styles.colRightMain}>
-                  <Form.Control name={props.name +'Hud2'} size='sm' type='number' placeholder='Hun' value={values.score2.hud} onChange={handleNumberChange} />
+                  <Form.Control name={eventName +'Hud2'} size='sm' type='number' placeholder='Hun' value={values.score2.hud} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>百分之一秒</Form.Label>
                 </div>
               </>
@@ -355,7 +360,7 @@ const EventInput = (props) => {
             {values.item.unit === 'points' ? (
               <>
                 <div className={styles.colRightMain1}>
-                  <Form.Control name={props.name +'Points2'} size='sm' type='number' placeholder='points' value={values.score2.points} onChange={handleNumberChange} />
+                  <Form.Control name={eventName +'Points2'} size='sm' type='number' placeholder='points' value={values.score2.points} onChange={handleNumberChange} />
                   <Form.Label className={styles.colRightSub}>分數</Form.Label>
                 </div>
 
@@ -364,16 +369,16 @@ const EventInput = (props) => {
             <span>
               <div className={styles.colRightMain1}>
                 <DatePicker
-                  id={props.name + 'date2'}
+                  id={eventName + 'date2'}
                   className={styles.datepicker}
-                  onChange={(date) => handleDate2Change(date)}
+                  onChange={handleDate2Change}
                   value={values.date2}
                   scrollableYearDropdown
                   showYearDropdown
                   name='date2'
-                  selected={Date.parse(values.date2)}
+                  selected={values.date2}
                   dateFormatCalendar='MMMM'
-                  dateFormat="mm/dd/yyyy"
+                  dateFormat="dd/MM/yyyy"
                 />
                 <Form.Label className={styles.colRightSub}>日期</Form.Label>
               </div>

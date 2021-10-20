@@ -12,9 +12,9 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        console.log(member);
+     //   console.log(member);
         const contact = await Connects.findOne({ member }).exec();
-        console.log(contact);
+     //   console.log(contact);
         if (!contact) {
           return res.status(400).json({ success: false });
         }
