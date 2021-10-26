@@ -66,7 +66,7 @@ const AppNavbar = () => {
           className={member === "" ? "disabled" : "disabled:false"}
         >
           <span>
-            確認送出 <br></br>Submit
+            確認送出與預覽 <br></br>Submit
           </span>
         </Button>
       </ButtonGroup>
