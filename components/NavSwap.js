@@ -57,6 +57,20 @@ const NavSwap = () => {
       </Button>
     );
   }
+  if (sportItem === 'tennis') {
+    return (
+      <Button
+        size='sm'
+        variant='light'
+        onClick={(e) => handleButtonClick(e, '/tennis')}
+        className={member === '' ? 'disabled' : 'disabled:false'}
+      >
+        <span>
+          網球成績<br></br>Tennis Performance
+        </span>
+      </Button>
+    );
+  }
   return;
 };
 
