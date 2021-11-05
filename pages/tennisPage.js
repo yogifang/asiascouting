@@ -57,6 +57,7 @@ const initialSubjects = {
 
 
 
+
 const ShootingPage = () => {
     const { member, setMember } = useContext(Context);
     const [values, setValues] = useState(initialBaseinfos);
@@ -141,6 +142,8 @@ const ShootingPage = () => {
         }
 
 
+
+
         const getPhoto = async () => {
             const url = process.env.HOST_URI + `api/photos/${member}`;
             const queryParams = {
@@ -221,7 +224,7 @@ const ShootingPage = () => {
     return (
         <Container className={styles.container}>
             <Navbar />
-            <h2 className={styles.m0}>Athletics Pages</h2>
+            <h2 className={styles.m0}>Tennis Pages</h2>
             <div className={styles.contant}>
 
                 <div className={styles.sheettable} style={{ width: '1024px' }}>

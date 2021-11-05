@@ -16,7 +16,7 @@ export default async (req, res) => {
       break;
     case "POST":
       req.body._id = null;
-      console.log(req.body)
+      // console.log(req.body)
       try {
         const photo = await Photos.create(req.body);
         res.status(201).json({ success: true, data: photo });
