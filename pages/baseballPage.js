@@ -149,7 +149,6 @@ const BaseballPage = () => {
     const getContacts = async () => {
       try {
         const url = process.env.HOST_URI + `api/contacts/${member}`;
-        //  const res = await fetch(`https://dashboard-chi-three.vercel.app/api/contacts/${member}`, {
         const res = await fetch(url, {
           method: 'GET',
           headers: {
@@ -302,17 +301,17 @@ const BaseballPage = () => {
             <Col className={styles.sidecolumn} sm='2'>
               <h5 className={styles.sidetitle}> </h5>
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <Image placeholder='empty' src={photo.image} alt='Picture of the author' width={210} height={250} />
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputTextBig cols='12' name='ChineseName' main='' value={values.ChineseName} />
               <OutputTextBig cols='12' name='PassportName' main='' value={values.PassportName} />
               <OutputText cols='12' name='Gender' main='' value={values.Gender} />
               <OutputContent cols="6" name="Hight" main="" value1={feetHeight(values.Height)} value2={(values.Weight / 0.454).toFixed(1)} unit1='' unit2='lb' />
               <OutputText cols='12' name='email' main='' value={valContact.email} />
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <FileBase64 type='file' multiple={false} onDone={({ base64 }) => setPhoto({ image: base64 })} />
               <button className='btn' onClick={onSubmitHandler}>
                 submit
@@ -327,12 +326,12 @@ const BaseballPage = () => {
                 Personal
               </h5>
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputDate cols='12' name='Birthday' main='Birthday' value={valContact.birthday} />
               <OutputText cols='12' name='Grade' main='Grade' value={values.currentGrad} />
               <OutputText cols='12' name='Citizenship' main='Citizenship' value={valContact.Nationality} />
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputText cols='12' name='CurrentSchool' main='Current School' value={valContact.school} />
               <OutputMonth
                 cols='12'
@@ -340,13 +339,13 @@ const BaseballPage = () => {
                 main='High school expected graduation date'
                 value={valContact.birthday}
               />
-              <OutputText cols='12' name='Residence' main='Passport Name' value={valContact.liveCity} />
+              <OutputText cols='12' name='Residence' main='Residence' value={valContact.liveCity} />
             </Col>
 
-            <Col sm='3'>
-              <OutputText cols='12' name='PriPosition' main='Position' value={valContact.PriPosition} />
-              <OutputText cols='12' name='SecPosition' main='Second Position' value={valContact.SecPosition} />
-              <OutputText cols='12' name='LeftRightHand' main='B/T' value={valContact.LeftRightHand} />
+            <Col xs={3}>
+              <OutputText cols='12' name='PriPosition' main='Position' value={values.PriPosition} />
+              <OutputText cols='12' name='SecPosition' main='Second Position' value={values.SecPosition} />
+              <OutputText cols='12' name='LeftRightHand' main='B/T' value={values.LeftRightHand} />
             </Col>
           </Row>
           <Row className={styles.sheettable}>
@@ -357,17 +356,17 @@ const BaseballPage = () => {
                 Subject
               </h5>
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputText cols='12' name='schoolgradesGPA' main='School grades GPA' value={valSubjects.GPA} />
               <OutputText cols='12' name='averagegrades' main='Average grades' value={valSubjects.AVG} />
               <OutputText cols='12' name='TOFEL' main='TOFEL' value={valSubjects.TOFEL} />
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputText cols='12' name='IELTS' main='IELTS' value={valSubjects.IELTS} />
               <OutputText cols='12' name='TOEIC' main='TOEIC' value={valSubjects.TOEIC} />
               <OutputText cols='12' name='SAT' main='SAT' value={valSubjects.SAT} />
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputText cols='12' name='ACT' main='ACT' value={valSubjects.ACT} />
               <OutputText
                 cols='12'
@@ -385,7 +384,7 @@ const BaseballPage = () => {
                 Baseball
               </h5>
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputText cols='12' name='TenYardSplit' main='10 yard sprint(s)' value={valPerformance.TenYardSplit} />
               <div className={styles.bgboarder}>
                 <h6> Pitching Performance </h6>
@@ -398,7 +397,7 @@ const BaseballPage = () => {
                 <OutputText2 cols='12' name1='BRUN' main1='R' value1={valPerformance.BRUN} name2='K' main2='K' value2={valPerformance.K} />
               </div>
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputText
                 cols='12'
                 name='SixtyYardSplit'
@@ -416,7 +415,7 @@ const BaseballPage = () => {
                 <OutputText cols='12' name='BB' main='BB' value={valPerformance.BB} />
               </div>
             </Col>
-            <Col sm='3'>
+            <Col xs={3}>
               <OutputText
                 cols='12'
                 name='latestGameName'

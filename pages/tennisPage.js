@@ -229,7 +229,7 @@ const ShootingPage = () => {
 
                 <div className={styles.sheettable} style={{ width: '1024px' }}>
                     <Row className={styles.sheettable}>
-                        <Col className={styles.sidecolumn} sm='2' >
+                        <Col className={styles.sidecolumn} xs={2} >
                             <h5 className={styles.sidetitle}></h5>
                         </Col>
                         <Col sm="3" >
@@ -258,7 +258,7 @@ const ShootingPage = () => {
                     </Row>
 
                     <Row className={styles.sheettable}>
-                        <Col className={styles.sidecolumn} sm='2' >
+                        <Col className={styles.sidecolumn} xs={2} >
                             <h5 className={styles.sidetitle}>information<br />Personal</h5>
                         </Col>
                         <Col sm="3" >
@@ -269,7 +269,7 @@ const ShootingPage = () => {
                         <Col sm="3" >
                             <OutputText cols="12" name="CurrentSchool" main="Current School" value={valContact.school} />
                             <OutputMonth cols="12" name="expectedgraduationdate" main="High school expected graduation date" value={valContact.birthday} />
-                            <OutputText cols="12" name="Residence" main="Passport Name" value={valContact.liveCity} />
+                            <OutputText cols="12" name="Residence" main="Residence" value={valContact.liveCity} />
                         </Col>
 
                         <Col sm="3" >
@@ -277,7 +277,7 @@ const ShootingPage = () => {
                         </Col>
                     </Row>
                     <Row className={styles.sheettable}>
-                        <Col className={styles.sidecolumn} sm='2' >
+                        <Col className={styles.sidecolumn} xs={2} >
                             <h5 className={styles.sidetitle}></h5>
                         </Col>
                         <Col sm='10' >
@@ -285,22 +285,22 @@ const ShootingPage = () => {
                         </Col>
                     </Row  >
                     <Row className={styles.sheettable}>
-                        <Col className={styles.sidecolumn} sm='2'>
+                        <Col className={styles.sidecolumn} xs={2}>
                             <h5 className={styles.sidetitle}>related<br />Subject</h5>
                         </Col>
-                        <Col sm='3'>
+                        <Col xs={3}>
                             <OutputText cols="12" name="schoolgradesGPA" main="School grades GPA" value={valSubjects.GPA} />
                             <OutputText cols="12" name="averagegrades" main="Average grades" value={valSubjects.AVG} />
                             <OutputText cols="12" name="TOFEL" main="TOFEL" value={valSubjects.TOFEL} />
 
                         </Col>
-                        <Col sm='3'>
+                        <Col xs={3}>
                             <OutputText cols="12" name="IELTS" main="IELTS" value={valSubjects.IELTS} />
                             <OutputText cols="12" name="TOEIC" main="TOEIC" value={valSubjects.TOEIC} />
                             <OutputText cols="12" name="SAT" main="SAT" value={valSubjects.SAT} />
 
                         </Col>
-                        <Col sm='3'>
+                        <Col xs={3}>
                             <OutputText cols="12" name="ACT" main="ACT" value={valSubjects.ACT} />
                             <OutputText cols="12" name="InterestsMajor" main="Interests in College Major" value={valSubjects.IntentMajor} />
                         </Col>
