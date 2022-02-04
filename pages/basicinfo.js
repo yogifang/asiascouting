@@ -61,7 +61,7 @@ const optionsGrads = [
   { value: "G10", label: "高中一年級" },
   { value: "G11", label: "高中二年級" },
   { value: "G12", label: "高中三年級" },
-  { value: "G13", label: "大學" },
+  { value: "College/Pro", label: "大學/職業" },
 ];
 
 const ChineseName = {
@@ -134,7 +134,7 @@ const BasicInfo = () => {
   const [selHands, setSelHands] = useState(optionsHands[0]);
   const [selGrads, setSelGrads] = useState(optionsGrads[0]);
   const [loaded, setLoaded] = useState(false);
-  const [dateGrad , setDateGrad] = useState(Date.now()) ;
+  const [dateGrad, setDateGrad] = useState(Date.now());
   const findIndexByValue = (options, value) => {
     const index = options.findIndex((options) => options.value === value);
     return index;
